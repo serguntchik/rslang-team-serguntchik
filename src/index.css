@@ -5,9 +5,44 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: aliceblue;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+a:link {
+  text-decoration: none;
+  color: white;
+  font-weight: 600;
+}
+
+.games{
+  display: flex;
+  justify-content: center;
+  background-color: #8dc6ff;
+}
+
+.manual{
+  display: flex;
+  justify-content: center;
+  background-color: #d5dd8f;
+}
+
+.statistic {
+  display: flex;
+  justify-content: center;
+  background-color: #8fdd9c;
+}
+
+.footer{
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: #1976d2;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
 }
