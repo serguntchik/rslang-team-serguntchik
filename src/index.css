@@ -19,6 +19,12 @@ a:link {
   font-weight: 600;
 }
 
+a:hover {
+  text-decoration: none;
+  color: white;
+  font-weight: 600;
+}
+
 .games{
   display: flex;
   justify-content: center;
@@ -45,4 +51,13 @@ a:link {
   bottom: 0;
   left: 0;
   width: 100%;
+}
+
+.wrapper__footer{
+  display: flex;
+  justify-content: space-around;
+  padding: 0 10px 0 10px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  color: white;
 }

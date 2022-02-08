@@ -23,21 +23,17 @@ const ResponsiveAppBar = () => {
 
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElNav(event.currentTarget);
-        console.log(' handleOpenNavMenu');
     };
     const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElUser(event.currentTarget);
-        console.log(' handleOpenUserMenu');
     };
 
     const handleCloseNavMenu = () => {
         setAnchorElNav(null);
-        console.log('close');
     };
 
     const handleCloseUserMenu = () => {
         setAnchorElUser(null);
-        console.log('close2');
     };
 
     return (
