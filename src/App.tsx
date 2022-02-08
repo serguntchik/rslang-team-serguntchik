@@ -10,10 +10,7 @@ import { Outlet, Link } from 'react-router-dom';
 function App() {
     return (
         <div className="App">
-            <ResponsiveAppBar />
             <div>some content</div>
-            <Footer />
-            <Outlet />
         </div>
     );
 }
