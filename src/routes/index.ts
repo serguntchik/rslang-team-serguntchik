@@ -1,3 +1,4 @@
+export * from '../components/CardList/CardList';
 export * from './Games';
 export * from './Manual';
 export * from './Statistic';

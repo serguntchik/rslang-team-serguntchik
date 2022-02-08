@@ -17,19 +17,15 @@
         "ecmaVersion": "latest",
         "sourceType": "module"
     },
-    "plugins": [
-        "react",
-        "@typescript-eslint",
-        "react-hooks"
-    ],
+    "plugins": ["react", "@typescript-eslint", "react-hooks"],
     "rules": {
         "@typescript-eslint/no-explicit-any": "error",
-        "import/extensions":[
+        "import/extensions": [
             "error",
             "ignorePackages",
             {
-                "ts":"never",
-                "tsx":"never"
+                "ts": "never",
+                "tsx": "never"
             }
         ],
         "max-len": ["error", { "code": 120 }],
@@ -44,17 +40,19 @@
                 "namedComponents": "arrow-function"
             }
         ],
+<<<<<<< HEAD
         "react/jsx-props-no-spreading": "off",
         "react/jsx-indent" : ["error", 4],
+=======
+        "react/jsx-indent": ["error", 4],
+>>>>>>> 4ff4f89 (feat: create card component)
         "react/jsx-indent-props": ["error", 4],
-        "react/jsx-filename-extension":[
+        "react/jsx-filename-extension": [
             "error",
             {
-                "extensions":[
-                    ".tsx"
-                ]
+                "extensions": [".tsx"]
             }
         ],
-        "react-hooks/rules-of-hooks":"error"
+        "react-hooks/rules-of-hooks": "error"
     }
 }
