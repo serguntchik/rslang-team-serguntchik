@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Footer = () => (
+export const Footer = () => (
     <div className="footer">
         <div className="wrapper wrapper__footer">
             <a
@@ -17,5 +17,3 @@ const Footer = () => (
         </div>
     </div>
 );
-
-export default Footer;

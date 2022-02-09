@@ -17,7 +17,7 @@ const pages = ['Игры', 'Учебник', 'Статистика'];
 const settings = ['Войти', 'Регистрация'];
 const linkRoute = ['games', 'manual', 'statistic'];
 
-const ResponsiveAppBar = () => {
+export const ResponsiveAppBar = () => {
     const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
     const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 
@@ -41,7 +41,7 @@ const ResponsiveAppBar = () => {
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
                     <Typography variant="h6" noWrap component="div" sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}>
-                        <Link to={'/'}>RS Lang</Link>
+                        <Link to="/">RS Lang</Link>
                     </Typography>
 
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -76,7 +76,7 @@ const ResponsiveAppBar = () => {
                             {pages.map((page, index) => (
                                 <MenuItem key={page} onClick={handleCloseNavMenu}>
                                     <Typography textAlign="center">
-                                        <Link to={'/' + linkRoute[index]}>{page}</Link>
+                                        <Link to={`/${linkRoute[index]}`}>{page}</Link>
                                     </Typography>
                                 </MenuItem>
                             ))}
@@ -88,7 +88,7 @@ const ResponsiveAppBar = () => {
                         component="div"
                         sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
                     >
-                        <Link to={'/'}>RS Lang</Link>
+                        <Link to="/">RS Lang</Link>
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                         {pages.map((page, index) => (
@@ -97,7 +97,7 @@ const ResponsiveAppBar = () => {
                                 onClick={handleCloseNavMenu}
                                 sx={{ my: 2, color: 'white', display: 'block' }}
                             >
-                                <Link to={'/' + linkRoute[index]}>{page}</Link>
+                                <Link to={`/${linkRoute[index]}`}>{page}</Link>
                             </Button>
                         ))}
                     </Box>
@@ -137,4 +137,3 @@ const ResponsiveAppBar = () => {
         </AppBar>
     );
 };
-export default ResponsiveAppBar;
