@@ -32,6 +32,7 @@
                 "tsx":"never"
             }
         ],
+        "max-len": ["error", { "code": 120 }],
         "import/prefer-default-export": "off",
         "indent": ["error", 4],
         "linebreak-style": "off",
