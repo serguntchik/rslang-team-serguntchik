@@ -1,0 +1,20 @@
+.git_logo {
+  height: 20px;
+  padding-right: 5px;
+}
+
+.git_link {
+  display: flex;
+  color:aliceblue
+}
+
+.wrapper__footer {
+  display: flex;
+  align-items: center;
+}
+
+.block_link {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+}
