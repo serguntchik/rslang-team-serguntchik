@@ -1,3 +1,6 @@
+html{
+  font-size: 10px;
+}
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -60,4 +63,11 @@ a:hover {
   flex-direction: row;
   flex-wrap: wrap;
   color: white;
+}
+
+.teams{
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
 }
