@@ -1,0 +1,17 @@
+.wrapper__team_page {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.teams {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.MuiCard-root{
+  margin: 10px;
+}

@@ -141,17 +141,6 @@
   }
 }
 
-.wrapper__team_page {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-}
-
-.MuiCard-root{
-  margin: 10px;
-}
-
 .btns{
   font-size: 1.6rem;
   letter-spacing: 0.1rem;

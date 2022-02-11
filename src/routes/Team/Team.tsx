@@ -1,5 +1,6 @@
 import React from 'react';
-import { ActionAreaCard } from '../components';
+import { ActionAreaCard } from '../../components';
+import './Team.css';
 
 const infoTeam = [
     {
