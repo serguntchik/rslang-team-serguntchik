@@ -68,15 +68,21 @@
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 .wrapper__team {
   width: 25%;
 =======
+=======
+>>>>>>> 2bba1627b549f65827ae02c6fdde71cd5ffeb2cc
 .carousel .control-dots .dot{
   background: #07699e;
 }
 
 .wrapper__slader_container {
+<<<<<<< HEAD
 >>>>>>> 8af10b5 (fix: main page, footer)
+=======
+>>>>>>> 2bba1627b549f65827ae02c6fdde71cd5ffeb2cc
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -91,6 +97,7 @@
 
 .text__about {
   padding: 10px 20px 20px 20px;
+<<<<<<< HEAD
 }
 
 @media screen and (max-width: 1400px) and (min-width: 1020px){
@@ -123,6 +130,40 @@
   }
 }
 
+=======
+}
+
+@media screen and (max-width: 1400px) and (min-width: 1020px){
+  .wrapper__mane_page{
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  }
+}
+
+@media screen and (max-width: 1020px) and (min-width: 812px){
+  .wrapper__mane_page{
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-row-gap: 12em;
+  }
+
+  .App-logo_static {
+    position: absolute;
+    top: 80px;
+    right: calc(10% - 100px);
+  }
+  
+  .App-logo {
+    top:calc(25% - 35px);
+    right: calc(10% - 95px);
+    position: absolute;
+    pointer-events: none;
+  }
+
+  .wrapper__slader_container {
+    padding: calc(10% - 15px);
+  }
+}
+
+>>>>>>> 2bba1627b549f65827ae02c6fdde71cd5ffeb2cc
 @media screen and (max-width: 812px) and (min-width: 420px){
   .wrapper__mane_page{
     grid-row-gap: 15em;
@@ -160,6 +201,7 @@
 
 .btn_color1{
   background-color: rgb(210, 165, 195);;
+<<<<<<< HEAD
 }
 
 .btn_color2{
@@ -173,3 +215,6 @@
 /* .wrapper_btns{
 
 } */
+=======
+}
+>>>>>>> 2bba1627b549f65827ae02c6fdde71cd5ffeb2cc
