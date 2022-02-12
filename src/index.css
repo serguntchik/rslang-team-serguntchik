@@ -64,10 +64,3 @@ a:hover {
   flex-wrap: wrap;
   color: white;
 }
-
-.teams{
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-}
