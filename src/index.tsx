@@ -5,7 +5,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './index.css';
 import { App } from './App';
 import {
-    Games, Manual, Statistic, Team,
+    Games, Manual, Statistic, Team, Sprint,
 } from './routes';
 import { AuthForm, Footer, ResponsiveAppBar } from './components';
 import { Provider } from './core/context';
@@ -21,6 +21,7 @@ render(
                     <Route path="/" element={<App />} />
                     <Route path="auth" element={<AuthForm />} />
                     <Route path="games" element={<Games />} />
+                    <Route path="games/sprint" element={<Sprint />} />
                     <Route path="manual" element={<Manual />} />
                     <Route path="statistic" element={<Statistic />} />
                     <Route path="team" element={<Team />} />
