@@ -8,7 +8,7 @@ import { App } from './App';
 import {
     Games, Manual, Statistic, Team,
 } from './routes';
-import { Footer, ResponsiveAppBar } from './components';
+import { AuthForm, Footer, ResponsiveAppBar } from './components';
 
 const rootElement = document.getElementById('root');
 
@@ -18,6 +18,7 @@ render(
             <ResponsiveAppBar />
             <Routes>
                 <Route path="/" element={<App />} />
+                <Route path="auth" element={<AuthForm />} />
                 <Route path="games" element={<Games />} />
                 <Route path="manual" element={<Manual />} />
                 <Route path="statistic" element={<Statistic />} />
