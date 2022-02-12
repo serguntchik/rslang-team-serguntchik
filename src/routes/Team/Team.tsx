@@ -31,7 +31,7 @@ const infoTeam = [
 
 export const Team: React.FC = () => (
     <div className="teams">
-        <h1>Our teams</h1>
+        <h1>Наша команда</h1>
         <div className="wrapper__team_page">
             {infoTeam.map((item) => (
                 <ActionAreaCard image={item.image} about={item.about} name={item.name} />
