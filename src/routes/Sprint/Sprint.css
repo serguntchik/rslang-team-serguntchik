@@ -1,0 +1,15 @@
+.h1{
+  color: #07699e;
+}
+
+.sprint {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 1.6rem;
+}
+
+.btn-start{
+  background-color: skyblue;
+  color:whitesmoke;
+}
