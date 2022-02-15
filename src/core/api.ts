@@ -1,10 +1,19 @@
 import axios from 'axios';
+import { ApiPath, IGetWords } from '../utils/alias';
 
 export interface IFormInput {
     email: string;
     password: string;
     name?: number;
 }
+
+export const baseUrl = process.env.REACT_APP_BASE_URL;
+
+export const getWords = async (data: IGetWords) => {
+    const response = await axios.get(`${baseUrl}${ApiPath.word}?group=${data.group}&page=${data.page}`);
+    data.setCards(response.data);
+};
+
 export const getNewToken = async () => {
     const refreshToken = localStorage.getItem('refreshToken');
     const id = localStorage.getItem('id');

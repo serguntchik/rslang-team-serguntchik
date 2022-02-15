@@ -21,20 +21,21 @@ export interface ICardData {
 }
 
 export interface ICardProps {
-    props: ICardData;
+    word: ICardData;
+    play: (word: ICardData, flag: boolean) => void;
     isPlaying: boolean;
-    setSoundSrc: (arr: string[]) => void;
-    setCardFlag: ({ cardId, flag }: ICardPlay) => void;
-    cardFlag: ICardPlay;
-    play: (serv: string, arr: string[], sound: HTMLAudioElement, flag: boolean) => void;
 }
 
+export interface IGetWords {
+    group: number;
+    page: number;
+    setCards: (data: ICardData[]) => void;
+}
 export interface ICardPropsData {
     props: ICardData[];
 }
 
-export const server = 'https://react-rs-langs.herokuapp.com';
-
+/* eslint-disable */
 export enum ApiPath {
     word = '/words',
 }

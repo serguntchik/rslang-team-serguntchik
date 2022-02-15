@@ -40,12 +40,8 @@
                 "namedComponents": "arrow-function"
             }
         ],
-<<<<<<< HEAD
         "react/jsx-props-no-spreading": "off",
         "react/jsx-indent" : ["error", 4],
-=======
-        "react/jsx-indent": ["error", 4],
->>>>>>> 4ff4f89 (feat: create card component)
         "react/jsx-indent-props": ["error", 4],
         "react/jsx-filename-extension": [
             "error",
