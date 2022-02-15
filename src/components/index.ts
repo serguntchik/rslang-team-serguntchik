@@ -7,3 +7,4 @@ export * from './Card/Card';
 export * from './CardList/CardList';
 export * from './Groups/Groups';
 export * from './Pagination/Pagination';
+export * from './GameAudio/AudioContainer';
