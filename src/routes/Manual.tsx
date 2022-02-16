@@ -9,14 +9,18 @@ export const Manual: React.FC = () => {
     const [page, setPage] = useState(0);
 
     useEffect(() => {
-        getWords({ group, page, setCards });
+        const getCardData = async () => {
+            const words: ICardData[] = await getWords({ group, page });
+            setCards(words);
+        };
+        getCardData();
     }, [page, group]);
 
     return (
         <div className="manual">
             <Groups setGroup={setGroup} />
             <PaginationRounded setPage={setPage} />
-            <CardList props={cards} />
+            <CardList words={cards} />
         </div>
     );
 };

@@ -4,26 +4,27 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import './index.css';
 import { App } from './App';
-import {
-    Games, Manual, Statistic, Team,
-} from './routes';
+import { Games, Manual, Statistic, Team } from './routes';
 import { AuthForm, Footer, ResponsiveAppBar } from './components';
+import { Provider } from './core/context';
 
 const rootElement = document.getElementById('root');
 
 render(
     <BrowserRouter>
         <div className="App">
-            <ResponsiveAppBar />
-            <Routes>
-                <Route path="/" element={<App />} />
-                <Route path="auth" element={<AuthForm />} />
-                <Route path="games" element={<Games />} />
-                <Route path="manual" element={<Manual />} />
-                <Route path="statistic" element={<Statistic />} />
-                <Route path="team" element={<Team />} />
-            </Routes>
-            <Footer />
+            <Provider value={localStorage.getItem('token')}>
+                <ResponsiveAppBar />
+                <Routes>
+                    <Route path="/" element={<App />} />
+                    <Route path="auth" element={<AuthForm />} />
+                    <Route path="games" element={<Games />} />
+                    <Route path="manual" element={<Manual />} />
+                    <Route path="statistic" element={<Statistic />} />
+                    <Route path="team" element={<Team />} />
+                </Routes>
+                <Footer />
+            </Provider>
         </div>
     </BrowserRouter>,
     rootElement,

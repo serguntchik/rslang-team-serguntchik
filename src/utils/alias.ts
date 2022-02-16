@@ -29,15 +29,16 @@ export interface ICardProps {
 export interface IGetWords {
     group: number;
     page: number;
-    setCards: (data: ICardData[]) => void;
-}
-export interface ICardPropsData {
-    props: ICardData[];
 }
 
-/* eslint-disable */
-export enum ApiPath {
-    word = '/words',
+export interface ICreateUserWord {
+    userId: string;
+    wordId: string;
+    word: { difficulty: string; optional?: {} };
+}
+
+export interface ICardPropsData {
+    words: ICardData[];
 }
 
 export interface PaginationRoundedProps {

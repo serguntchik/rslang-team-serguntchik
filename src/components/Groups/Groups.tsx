@@ -14,6 +14,7 @@ export const Groups: React.FC<GroupsProps> = (props) => {
         setAnchorEl(null);
     };
     const { setGroup } = props;
+
     return (
         <div>
             <Button
@@ -77,7 +78,7 @@ export const Groups: React.FC<GroupsProps> = (props) => {
                 </MenuItem>
                 <MenuItem
                     onClick={() => {
-                        setGroup(1);
+                        setGroup(5);
                         handleClose();
                     }}
                 >
