@@ -1,47 +1,46 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Carousel } from 'react-responsive-carousel';
-import 'react-responsive-carousel/lib/styles/carousel.min.css';
-import './App.css';
+import React, { useEffect, useState } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-export const App: React.FC = () => (
-    <div className="App">
-        <div className="wrapper wrapper__mane_page">
-            <div className="wrapper_animation">
-                <img src="/rslang_logo_colorfull-1.svg" alt="logo" className="App-logo_static" />
-                <img src="/rs_lang_background_yellow.svg" alt="logo" className="App-logo left yellow" />
-                <img src="/rs_lang_background_purple.svg" alt="logo" className="App-logo left " />
-                <img src="/rs_lang_background_blue.svg" alt="logo" className="App-logo slow" />
-            </div>
-            <div className="wrapper_slider">
-                <Carousel>
-                    <div className="wrapper__slader_container">
-                        <h1 className="h1">Our team</h1>
-                        <span className="text__about">
-                            We are Sergey, Victor, Lubomir and Olga - a team of young professionals in the Rolling
-                            Scopes School React course, we offer you an application for learning English.
-                        </span>
-                        <Link to="/team">
-                            <button className="btns btn_color1" type="button">
-                                more
-                            </button>
-                        </Link>
-                    </div>
-                    <div className="wrapper__slader_container">
-                        <h1 className="h1">RS Lang</h1>
-                        <span className="text__about">
-                            Now learning English is easy and fun! Play mini-games and learn to memorize words. The
-                            dictionary contains all the words that were previously encountered in games. Repeat them
-                            every day to consolidate the result.
-                        </span>
-                        <Link to="/team">
-                            <button className="btns btn_color1" type="button">
-                                more
-                            </button>
-                        </Link>
-                    </div>
-                </Carousel>
-            </div>
-        </div>
-    </div>
-);
+import { getCurrentUser } from './core/api';
+import { MyContext } from './core/context';
+import { LogIn, Footer, ResponsiveAppBar } from './components';
+import {
+    DifficultWords, Games, MainPage, Manual, Statistic, Team,
+} from './routes';
+import { IGetCurrentUser } from './utils/alias';
+
+export const App = () => {
+    const [currentUser, setCurrentUser] = useState<IGetCurrentUser | null>(null);
+
+    useEffect(() => {
+        const getUser = async () => {
+            const user = await getCurrentUser();
+            setCurrentUser(user);
+        };
+        localStorage.getItem('token') && getUser();
+    }, []);
+
+    return (
+        <MyContext.Provider value={currentUser}>
+            <BrowserRouter>
+                <div className="App">
+                    <ResponsiveAppBar />
+                    <Routes>
+                        <Route path="/" element={<MainPage />} />
+                        <Route path="auth" element={<LogIn />} />
+                        <Route path="games" element={<Games />} />
+                        <Route path="manual" element={<Manual />} />
+                        {currentUser ? (
+                            <Route path="difficult" element={<DifficultWords />} />
+                        ) : (
+                            <Route path="difficult" element={<p>Необходимо авторизоваться</p>} />
+                        )}
+                        <Route path="statistic" element={<Statistic />} />
+                        <Route path="team" element={<Team />} />
+                    </Routes>
+                    <Footer />
+                </div>
+            </BrowserRouter>
+        </MyContext.Provider>
+    );
+};

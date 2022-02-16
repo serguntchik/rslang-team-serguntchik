@@ -13,8 +13,8 @@ import { AppBar } from '@mui/material';
 import MenuIcon from '@material-ui/icons/Menu';
 import { Outlet, Link } from 'react-router-dom';
 
-const pages = ['Игры', 'Учебник', 'Статистика'];
-const linkRoute = ['games', 'manual', 'statistic'];
+const pages = ['Игры', 'Учебник', 'Словарь', 'Статистика'];
+const linkRoute = ['games', 'manual', 'difficult', 'statistic'];
 
 export const ResponsiveAppBar = () => {
     const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);

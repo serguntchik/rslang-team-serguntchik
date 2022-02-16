@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ICardData, ICreateUserWord, IGetWords } from '../utils/alias';
+import { ICardData, IGetWords } from '../utils/alias';
 
 export interface IFormInput {
     email: string;
@@ -7,8 +7,19 @@ export interface IFormInput {
     name?: number;
 }
 
+export interface IQueryParams {
+    key?: string;
+    value?: number | string;
+}
+
 export const baseUrl = process.env.REACT_APP_BASE_URL;
 
+const generateQueryString = (queryParams: IQueryParams[] = []) => {
+    const querry = queryParams.length ? `?${queryParams.map((item) => `${item.key}=${item.value}`).join('&')}` : '';
+    return querry;
+};
+
+// Words
 export const getWords = async (data: IGetWords) => {
     const response = await axios.get(`${baseUrl}/words?group=${data.group}&page=${data.page}`);
     return response.data;
@@ -27,6 +38,20 @@ export const createUserWord = async (word: ICardData) => {
     );
 };
 
+export const deletUserWord = async (word: ICardData) => {
+    const userId = localStorage.getItem('id');
+    await axios.delete(
+        /* eslint no-underscore-dangle: [1, { "allow": ["__place"] }] */
+        `${baseUrl}/users/${userId}/words/${word._id}`,
+        {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+            },
+        },
+    );
+};
+
+// Users
 export const getNewToken = async () => {
     const refreshToken = localStorage.getItem('refreshToken');
     const id = localStorage.getItem('id');
@@ -44,6 +69,17 @@ export const createUser = async (data: IFormInput) => {
     return response.data;
 };
 
+export const getCurrentUser = async () => {
+    const response = await axios.get(`${baseUrl}/users`, {
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+    });
+
+    return response.data;
+};
+
+// Sign In
 export const signIn = async (user: IFormInput) => {
     const response = await axios.post(`${baseUrl}/signin`, user);
     return response.data;
@@ -58,3 +94,21 @@ axios.interceptors.response.use(
         return Promise.reject(rej);
     },
 );
+
+// User/AggregatedWords
+
+export const getAllUserAggregatedWords = async (data: IGetWords) => {
+    const filter = `{"$and":[{"userWord.difficulty":"hard", "group":${data.group}, "page":${data.page}}]}`;
+    const response = await axios.get(
+        `${baseUrl}/users/${data.userId}/aggregatedWords/${generateQueryString([
+            { key: 'wordsPerPage', value: 20 },
+            { key: 'filter', value: filter },
+        ])}`,
+        {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+            },
+        },
+    );
+    return response.data[0].paginatedResults;
+};
