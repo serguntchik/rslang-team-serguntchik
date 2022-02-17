@@ -1,0 +1,8 @@
+.manual {
+    padding: 20px;
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+}
