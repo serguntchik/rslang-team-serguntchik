@@ -28,12 +28,6 @@ a:hover {
   font-weight: 600;
 }
 
-.games{
-  display: flex;
-  justify-content: center;
-  background-color: #8dc6ff;
-}
-
 .manual{
   display: flex;
   justify-content: center;

@@ -1,19 +1,34 @@
 import React from 'react';
+import { Button } from '@mui/material';
+import Stack from '@mui/material/Stack';
 import './Sprint.css';
 
-const count = 0;
-const timer = 0;
+export interface SprintCard {
+    word: string;
+    translateWord: string;
+    changeCard: () => void;
+}
 
-export const Sprint: React.FC = () => (
-    <div className="sprint">
-        <div className="sprint card">
-            <h1 className="h1">
-                Текущий результат -
-                {count}
-            </h1>
-            <div className="card_body">
-                <div className="timer">{timer}</div>
+export const Card = (props: SprintCard) => {
+    const { word, translateWord, changeCard } = props;
+    return (
+        <div className="sprint sprint_card">
+            <div className="sprint_words">
+                <div className="sprint_word">{word}</div>
+                <div className="sprint_translate">{translateWord}</div>
             </div>
+            <Stack direction="row" spacing={2}>
+                <Button variant="contained" color="success" onClick={changeCard}>
+                    {' '}
+                    Верно
+                    {' '}
+                </Button>
+                <Button variant="outlined" color="secondary" onClick={changeCard}>
+                    {' '}
+                    Неверно
+                    {' '}
+                </Button>
+            </Stack>
         </div>
-    </div>
-);
+    );
+};

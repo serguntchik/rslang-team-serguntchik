@@ -13,3 +13,22 @@
   background-color: skyblue;
   color:whitesmoke;
 }
+
+.sprint_card{
+  background-color: rgb(174, 74, 132, 0.5);
+  padding: 30px;
+  border-radius: 20px;
+}
+
+.sprint_words {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: whitesmoke;
+  padding: 20px;
+}
+
+.sprint_word {
+  font-weight: 600;
+  font-size: 3rem;
+}
