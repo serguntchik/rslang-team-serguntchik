@@ -14,10 +14,17 @@
   color:whitesmoke;
 }
 
+.container_sprint_card {
+  display: flex;
+  height: 85vh;
+  width: auto;
+}
+
 .sprint_card{
   background-color: rgb(174, 74, 132, 0.5);
   padding: 30px;
   border-radius: 20px;
+  margin: auto;
 }
 
 .sprint_words {
@@ -31,4 +38,9 @@
 .sprint_word {
   font-weight: 600;
   font-size: 3rem;
+}
+
+.wrapper__close_btn {
+  display: flex;
+  justify-content: flex-end;
 }

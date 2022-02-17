@@ -1,44 +1,15 @@
 import React, { useEffect, useCallback } from 'react';
 import {
-    InputLabel, MenuItem, Select, SelectChangeEvent,
+    Button, InputLabel, MenuItem, Select, SelectChangeEvent,
 } from '@mui/material';
 import Box from '@mui/material/Box';
 import FormControl from '@mui/material/FormControl';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { Card } from './Card';
-// import { style } from './style';
+import { style } from './style';
 import './Sprint.css';
 
-// import { SprintStartPage } from './SprintStartPage';
-
-const style = {
-    position: 'absolute' as const,
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: 4,
-};
-interface wordItem {
-    id: string;
-    group: number;
-    page: number;
-    word: string;
-    image: string;
-    audio: string;
-    audioMeaning: string;
-    audioExample: string;
-    textMeaning: string;
-    textExample: string;
-    transcription: string;
-    wordTranslate: string;
-    textMeaningTranslate: string;
-    textExampleTranslate: string;
-}
 interface wordItemMix {
     correct: boolean;
     id: string;
@@ -64,17 +35,23 @@ export const Sprint: React.FC = () => {
     const [currentWord, setCurrentWord] = React.useState('');
     const [translateWord, settranslateWord] = React.useState('');
     const [indexWord, setindexWord] = React.useState(0);
+    const [pageWord, setPageWord] = React.useState(0);
+    const [min] = React.useState(0);
+    const [max] = React.useState(29);
 
     const [open, setOpen] = React.useState(false);
     const handleClose = () => setOpen(false);
+    // const handleOpen = () => setOpen(true);
 
     const handleChange = (event: SelectChangeEvent) => {
         setLevel(event.target.value);
+        setPageWord(Math.floor(Math.random() * (max - min)) + min);
     };
 
     useEffect(() => {
         if (startGame) {
-            fetch(`${process.env.REACT_APP_BASE_URL}/words`)
+            console.log(level, pageWord, '>>start');
+            fetch(`${process.env.REACT_APP_BASE_URL}words?page=${pageWord}&group=${level}`)
                 .then((response) => response.json())
                 .then((data) => {
                     const firstWordTranslate = data[0].wordTranslate;
@@ -83,6 +60,8 @@ export const Sprint: React.FC = () => {
                             const wordTranslate = index % 2 === 0
                                 ? data[index + 2]?.wordTranslate || firstWordTranslate
                                 : item.wordTranslate;
+                            setCurrentWord(item.word);
+                            settranslateWord(item.wordTranslate);
                             return {
                                 ...item,
                                 wordTranslate,
@@ -99,13 +78,10 @@ export const Sprint: React.FC = () => {
     };
 
     const changeCard = useCallback(() => {
-        console.log(indexWord, cards, '222');
         setindexWord(indexWord + 1);
-        if (indexWord % 2) {
-            setCurrentWord(cards[indexWord].word);
-            settranslateWord(cards[indexWord + 2].wordTranslate);
-        }
-        if (indexWord === cards.length) {
+        setCurrentWord(cards[indexWord].word);
+        settranslateWord(cards[indexWord].wordTranslate);
+        if (indexWord === cards.length - 1) {
             setOpen(true);
         }
     }, [indexWord]);
@@ -141,6 +117,10 @@ export const Sprint: React.FC = () => {
                     </button>
                 </div>
             </div>
+        </div>
+    ) : (
+        <div className="sprint">
+            <Card word={currentWord} translateWord={translateWord} changeCard={changeCard} />
             <div>
                 <Modal
                     open={open}
@@ -149,17 +129,21 @@ export const Sprint: React.FC = () => {
                     aria-describedby="modal-modal-description"
                 >
                     <Box sx={style}>
-                        <Typography id="modal-modal-title" variant="h6" component="h2">
-                            Text in a modal
+                        <div className="wrapper__close_btn">
+                            <Button onClick={handleClose}>Закрыть</Button>
+                        </div>
+                        <Typography id="modal-modal-title" variant="h5" component="h2">
+                            Поздравляем, отличный результат!
                         </Typography>
                         <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+                            ЗНАЮ: 15
+                        </Typography>
+                        <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                            НЕ ЗНАЮ: 15
                         </Typography>
                     </Box>
                 </Modal>
             </div>
         </div>
-    ) : (
-        <Card word={currentWord} translateWord={translateWord} changeCard={changeCard} />
     );
 };
