@@ -14,18 +14,20 @@ import { Consumer } from '../../core/context';
 
 const myComponent = (text: string) => <span dangerouslySetInnerHTML={{ __html: text }} />;
 
-export const CardItem: React.FC<ICardProps> = ({ word, isPlaying, play }) => (
+export const CardItem: React.FC<ICardProps> = ({
+    word, isPlaying, play, pause,
+}) => (
     <Consumer>
         {(value) => (
             <Card sx={{ maxWidth: 450 }}>
                 <CardHeader
                     action={
                         isPlaying ? (
-                            <IconButton aria-label="play/pause" onClick={() => play(word, isPlaying)}>
+                            <IconButton aria-label="play/pause" onClick={() => play(word)}>
                                 <PlayCircleOutlineIcon />
                             </IconButton>
                         ) : (
-                            <IconButton aria-label="play/pause" onClick={() => play(word, isPlaying)}>
+                            <IconButton aria-label="play/pause" onClick={() => pause()}>
                                 <PauseCircleOutlineIcon />
                             </IconButton>
                         )
@@ -45,16 +47,7 @@ export const CardItem: React.FC<ICardProps> = ({ word, isPlaying, play }) => (
                     </Typography>
                 </CardContent>
                 {value ? (
-                    <IconButton
-                        aria-label="add to favorites"
-                        onClick={() =>
-                            createUserWord({
-                                userId: `${localStorage.getItem('id')}`,
-                                wordId: word.id,
-                                word: { difficulty: 'hard' },
-                            })
-                        }
-                    >
+                    <IconButton aria-label="add to favorites" onClick={() => createUserWord(word)}>
                         <BookmarkAddIcon />
                     </IconButton>
                 ) : null}

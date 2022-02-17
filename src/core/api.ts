@@ -11,16 +11,20 @@ export const baseUrl = process.env.REACT_APP_BASE_URL;
 
 export const getWords = async (data: IGetWords) => {
     const response = await axios.get(`${baseUrl}/words?group=${data.group}&page=${data.page}`);
-    const responseData: ICardData[] = response.data;
-    return responseData;
+    return response.data;
 };
 
-export const createUserWord = async (data: ICreateUserWord) => {
-    const response = await axios.post(`${baseUrl}/users/${data.userId}/words/${data.wordId}`, data.word, {
-        headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
+export const createUserWord = async (word: ICardData) => {
+    const userId = localStorage.getItem('id');
+    await axios.post(
+        `${baseUrl}/users/${userId}/words/${word.id}`,
+        { difficulty: 'hard' },
+        {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+            },
         },
-    });
+    );
 };
 
 export const getNewToken = async () => {

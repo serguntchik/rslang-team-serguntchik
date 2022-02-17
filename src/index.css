@@ -34,12 +34,6 @@ a:hover {
   background-color: #8dc6ff;
 }
 
-.manual{
-  display: flex;
-  justify-content: center;
-  background-color: #d5dd8f;
-}
-
 .statistic {
   display: flex;
   justify-content: center;

@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { CardList, Groups, PaginationRounded } from '../components';
-import { getWords } from '../core/api';
-import { ICardData } from '../utils/alias';
+
+import './Manual.css';
+
+import { CardList, Groups, PaginationRounded } from '../../components';
+import { getWords } from '../../core/api';
+import { ICardData } from '../../utils/alias';
 
 export const Manual: React.FC = () => {
     const [cards, setCards] = useState<ICardData[]>([]);
@@ -18,8 +21,10 @@ export const Manual: React.FC = () => {
 
     return (
         <div className="manual">
-            <Groups setGroup={setGroup} />
-            <PaginationRounded setPage={setPage} />
+            <div className="controls">
+                <Groups setGroup={setGroup} />
+                <PaginationRounded setPage={setPage} />
+            </div>
             <CardList words={cards} />
         </div>
     );

@@ -4,7 +4,9 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import './index.css';
 import { App } from './App';
-import { Games, Manual, Statistic, Team } from './routes';
+import {
+    Games, Manual, Statistic, Team,
+} from './routes';
 import { AuthForm, Footer, ResponsiveAppBar } from './components';
 import { Provider } from './core/context';
 

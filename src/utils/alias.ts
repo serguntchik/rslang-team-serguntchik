@@ -22,7 +22,8 @@ export interface ICardData {
 
 export interface ICardProps {
     word: ICardData;
-    play: (word: ICardData, flag: boolean) => void;
+    play: (word: ICardData) => void;
+    pause: () => void;
     isPlaying: boolean;
 }
 
@@ -34,7 +35,7 @@ export interface IGetWords {
 export interface ICreateUserWord {
     userId: string;
     wordId: string;
-    word: { difficulty: string; optional?: {} };
+    word: { difficulty: string; optional?: Record<string, unknown> };
 }
 
 export interface ICardPropsData {

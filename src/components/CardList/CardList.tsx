@@ -1,4 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
+
+import Grid from '@mui/material/Grid';
+
 import { baseUrl } from '../../core/api';
 import { ICardData, ICardPropsData } from '../../utils/alias';
 import { CardItem } from '../Card/Card';
@@ -7,17 +10,25 @@ export const CardList: React.FC<ICardPropsData> = ({ words }) => {
     const [currentPlayingWord, setCurrentPlayingWord] = useState<ICardData | null>(null);
     const audioElement = useRef(new Audio());
 
-    const onPlayClicked = (word: ICardData, flag: boolean) => {
-        if (flag) {
+    const onPlayClicked = (word: ICardData) => {
+        if (currentPlayingWord) {
             audioElement.current.pause();
-            audioElement.current.currentTime = 0;
         }
-        setCurrentPlayingWord(word !== currentPlayingWord || flag ? word : null);
+        setCurrentPlayingWord(word);
+    };
+
+    const onPauseClicked = () => {
+        audioElement.current.pause();
+        setCurrentPlayingWord(null);
     };
 
     const play = () => {
+        if (!currentPlayingWord) {
+            return;
+        }
+
         const audioFile = audioElement.current;
-        const arr = [currentPlayingWord?.audio, currentPlayingWord?.audioMeaning, currentPlayingWord?.audioExample];
+        const arr = [currentPlayingWord.audio, currentPlayingWord.audioMeaning, currentPlayingWord.audioExample];
         let trackIndex = 0;
 
         const playAudio = (src: string) => {
@@ -43,23 +54,22 @@ export const CardList: React.FC<ICardPropsData> = ({ words }) => {
         }
     };
 
-    useEffect(() => {
-        play();
-    }, [currentPlayingWord]);
+    useEffect(() => play(), [currentPlayingWord]);
 
-    useEffect(() => {
-        console.log();
-
-        return () => {
-            audioElement.current.pause();
-        };
-    }, [words]);
+    useEffect(() => () => audioElement.current.pause(), [words]);
 
     return (
-        <div>
+        <Grid container spacing={2}>
             {words.map((card) => (
-                <CardItem key={card.id} word={card} play={onPlayClicked} isPlaying={card !== currentPlayingWord} />
+                <Grid key={card.id} item lg={3} md={4} sm={6} xs={12}>
+                    <CardItem
+                        word={card}
+                        play={onPlayClicked}
+                        pause={onPauseClicked}
+                        isPlaying={card !== currentPlayingWord}
+                    />
+                </Grid>
             ))}
-        </div>
+        </Grid>
     );
 };
