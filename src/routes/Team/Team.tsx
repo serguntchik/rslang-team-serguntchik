@@ -6,26 +6,26 @@ const infoTeam = [
     {
         id: '1',
         image: '/avaredcat.png',
-        about: 'team leader',
-        name: 'Sergey',
+        about: 'Тимлид',
+        name: 'Сергей',
     },
     {
         id: '2',
-        image: '/avahusky.png',
-        about: 'bbb',
-        name: 'Victor',
+        image: '/viktor.jpg',
+        about: 'разработчик',
+        name: 'Виктор',
     },
     {
         id: '3',
         image: '/avapanda.png',
-        about: 'ccc',
-        name: 'Lubomir',
+        about: 'разработчик',
+        name: 'Любомир',
     },
     {
         id: '4',
-        image: '/avaraccoon.png',
-        about: 'ddd',
-        name: 'Olga',
+        image: '/olga.jpg',
+        about: 'разработчик',
+        name: 'Ольга',
     },
 ];
 
