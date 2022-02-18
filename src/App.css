@@ -67,22 +67,15 @@
   display: flex;
 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 .wrapper__team {
   width: 25%;
-=======
-=======
->>>>>>> 2bba1627b549f65827ae02c6fdde71cd5ffeb2cc
+}
+
 .carousel .control-dots .dot{
   background: #07699e;
 }
 
 .wrapper__slader_container {
-<<<<<<< HEAD
->>>>>>> 8af10b5 (fix: main page, footer)
-=======
->>>>>>> 2bba1627b549f65827ae02c6fdde71cd5ffeb2cc
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -97,7 +90,6 @@
 
 .text__about {
   padding: 10px 20px 20px 20px;
-<<<<<<< HEAD
 }
 
 @media screen and (max-width: 1400px) and (min-width: 1020px){
@@ -130,9 +122,6 @@
   }
 }
 
-=======
-}
-
 @media screen and (max-width: 1400px) and (min-width: 1020px){
   .wrapper__mane_page{
     grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
@@ -163,7 +152,6 @@
   }
 }
 
->>>>>>> 2bba1627b549f65827ae02c6fdde71cd5ffeb2cc
 @media screen and (max-width: 812px) and (min-width: 420px){
   .wrapper__mane_page{
     grid-row-gap: 15em;
@@ -200,21 +188,13 @@
 }
 
 .btn_color1{
-  background-color: rgb(210, 165, 195);;
-<<<<<<< HEAD
+  background-color: rgb(210, 165, 195);
 }
 
 .btn_color2{
-  background-color: rgb(210, 165, 195);;
+  background-color: rgb(210, 165, 195);
 }
 
 .btn_color3{
-  background-color: rgb(210, 165, 195);;
+  background-color: rgb(210, 165, 195);
 }
-
-/* .wrapper_btns{
-
-} */
-=======
-}
->>>>>>> 2bba1627b549f65827ae02c6fdde71cd5ffeb2cc
