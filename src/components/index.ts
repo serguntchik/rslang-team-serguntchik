@@ -1,5 +1,5 @@
 export * from './ActionAreaCard/ActionAreaCard';
-export * from './Auth/AuthForm';
+export * from './Auth/Authentication';
 export * from './ResponsiveAppBar/ResponsiveAppBar';
 export * from './Footer/Footer';
 export * from './Card/Card';
