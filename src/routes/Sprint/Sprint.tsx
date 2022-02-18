@@ -42,11 +42,12 @@ export const Sprint: React.FC = () => {
     const [answersFalse, setAnwersFalse] = React.useState<wordItemMix[]>([]);
 
     const [open, setOpen] = React.useState(false);
-    const handleClose = () => setOpen(false);
+    const handleClose = () => {
+        setOpen(false);
+        setCards([]);
+    };
     const falseAnswer = () => {
-        setAnwersFalse(
-            cards.filter((item) => answers.some((i) => item.correct !== i.correct)),
-        );
+        setAnwersFalse(cards.filter((item) => answers.some((i) => item.correct !== i.correct)));
     };
 
     const handleChange = (event: SelectChangeEvent) => {
@@ -83,12 +84,6 @@ export const Sprint: React.FC = () => {
         setStartGame(true);
     };
 
-    // const result = cards.filter(item => {
-    //     return answers.some(i => {
-    //         return item.correct === i.correct
-    //     });
-    // });
-
     const changeCardTrue = useCallback(() => {
         setindexWord(indexWord + 1);
         if (cards.length === 0 && cards[0].correct === true) {
@@ -96,13 +91,15 @@ export const Sprint: React.FC = () => {
         } else {
             setCurrentWord(cards[indexWord].word);
             settranslateWord(cards[indexWord].wordTranslate);
-            if (cards[0].correct === true) {
+            if (cards[indexWord].correct === true) {
                 answers.push(cards[indexWord]);
+            }
+            if (cards[indexWord].correct === false) {
+                answersFalse.push(cards[indexWord]);
             }
             if (indexWord === cards.length - 1) {
                 setOpen(true);
-                falseAnswer();
-                console.log(answers, answersFalse, '<<abswer');
+                console.log(answers, answersFalse, '<<answer');
             }
         }
     }, [indexWord]);
@@ -114,13 +111,15 @@ export const Sprint: React.FC = () => {
         } else {
             setCurrentWord(cards[indexWord].word);
             settranslateWord(cards[indexWord].wordTranslate);
-            if (cards[0].correct === false) {
+            if (cards[indexWord].correct === false) {
                 answers.push(cards[indexWord]);
+            }
+            if (cards[indexWord].correct === true) {
+                answersFalse.push(cards[indexWord]);
             }
             if (indexWord === cards.length - 1) {
                 setOpen(true);
-                falseAnswer();
-                console.log(answers, answersFalse, '<<abswer');
+                console.log(answers, answersFalse, '<<answer');
             }
         }
     }, [indexWord]);
@@ -180,10 +179,12 @@ export const Sprint: React.FC = () => {
                             Поздравляем, отличный результат!
                         </Typography>
                         <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                            ЗНАЮ: 15
+                            ЗНАЮ:
+                            {answers.length}
                         </Typography>
                         <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                            НЕ ЗНАЮ: 15
+                            НЕ ЗНАЮ:
+                            {answersFalse.length}
                         </Typography>
                     </Box>
                 </Modal>
