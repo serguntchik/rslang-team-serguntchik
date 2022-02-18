@@ -96,13 +96,9 @@ export const ResponsiveAppBar = () => {
                     </Box>
 
                     <Box sx={{ flexGrow: 0 }}>
-                        <Link to="/auth">
-                            <Tooltip title="Open settings">
-                                <IconButton sx={{ p: 0 }}>
-                                    <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-                                </IconButton>
-                            </Tooltip>
-                        </Link>
+                        <Button color="inherit">
+                            <Link to="/login">Войти</Link>
+                        </Button>
                     </Box>
                 </Toolbar>
             </Container>

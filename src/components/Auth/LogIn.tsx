@@ -56,13 +56,13 @@ export const LogIn: React.FC = () => {
     return (
         <Container>
             <form className="authForm" onSubmit={handleSubmit(onSubmit)}>
-                <h2>Log in to your account!</h2>
+                <h2>Войти</h2>
                 <TextField
                     id="outlined-basic-1"
                     label="Email"
                     variant="outlined"
                     required
-                    style={{ margin: '10px 0px' }}
+                    style={{ margin: '10px 0px', width: '100%' }}
                     {...register('email', {
                         required: true,
                         pattern:
@@ -79,7 +79,7 @@ export const LogIn: React.FC = () => {
                     type={showPassword ? 'text' : 'password'}
                     autoComplete="off"
                     required
-                    style={{ margin: '10px 0px' }}
+                    style={{ margin: '10px 0px', width: '100%' }}
                     InputProps={{
                         endAdornment: (
                             <InputAdornment position="end">
@@ -101,7 +101,7 @@ export const LogIn: React.FC = () => {
                     type="submit"
                     disabled={!isValid || isWait}
                     color="primary"
-                    style={{ margin: '20px 0px' }}
+                    style={{ margin: '20px 0px', width: '100%' }}
                 >
                     Войти
                 </Button>

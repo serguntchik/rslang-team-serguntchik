@@ -41,13 +41,27 @@ export const Authentication: React.FC = () => {
     return (
         <Container>
             <form className="authForm" onSubmit={handleSubmit(onSubmit)}>
-                <h2>Sign up for free and experience RSlang today!!!</h2>
+                <h2>Зарегистрироваться</h2>
+
+                <TextField
+                    id="outlined-basic-3"
+                    label="Имя"
+                    variant="outlined"
+                    required
+                    style={{ width: '100%' }}
+                    {...register('name', {
+                        required: true,
+                        minLength: { value: 3, message: 'min length 3 symbol' },
+                    })}
+                />
+                {errors?.name && <p className="auth-error">{errors.name?.message || 'incorrect Name'}</p>}
+
                 <TextField
                     id="outlined-basic-1"
                     label="Email"
                     variant="outlined"
                     required
-                    style={{ margin: '10px 0px' }}
+                    style={{ margin: '10px 0px', width: '100%' }}
                     {...register('email', {
                         required: true,
                         pattern:
@@ -64,7 +78,7 @@ export const Authentication: React.FC = () => {
                     type={showPassword ? 'text' : 'password'}
                     autoComplete="off"
                     required
-                    style={{ margin: '10px 0px' }}
+                    style={{ margin: '10px 0px', width: '100%' }}
                     InputProps={{
                         endAdornment: (
                             <InputAdornment position="end">
@@ -80,17 +94,6 @@ export const Authentication: React.FC = () => {
                     })}
                 />
                 {errors?.password && <p className="auth-error">{errors.password?.message || 'incorrect password'}</p>}
-                <TextField
-                    id="outlined-basic-3"
-                    label="Имя"
-                    variant="outlined"
-                    required
-                    {...register('name', {
-                        required: true,
-                        minLength: { value: 3, message: 'min length 3 symbol' },
-                    })}
-                />
-                {errors?.name && <p className="auth-error">{errors.name?.message || 'incorrect Name'}</p>}
                 {isErrorLogin || <p className="auth-error">такой email уже зарегистрирован</p>}
 
                 <Button
@@ -98,7 +101,7 @@ export const Authentication: React.FC = () => {
                     type="submit"
                     disabled={!isValid || isWait}
                     color="primary"
-                    style={{ margin: '20px 0px' }}
+                    style={{ margin: '20px 0px', width: '100%' }}
                 >
                     Зарегистрироваться
                 </Button>
