@@ -11,21 +11,22 @@ export interface TeamCard {
     about: string;
     name: string;
     git: string;
+    key: string;
 }
 
 export const ActionAreaCard: React.FC<TeamCard> = (props: TeamCard) => {
     const {
-        image, about, name, git,
+        image, about, name, git, key,
     } = props;
     return (
-        <Card sx={{ maxWidth: 345 }}>
+        <Card sx={{ maxWidth: 150 }} key={key}>
             <CardActionArea>
                 <CardMedia component="img" height="140" image={image} alt="photo" />
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="div">
                         <a href={git} target="_blank" rel="noreferrer">
+                            <img src="/logo_git_violet.svg" alt="git-logo" className="git_logo_teams" />
                             {name}
-                            <img src="./logo_git.svg" alt="logo_git" />
                         </a>
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
