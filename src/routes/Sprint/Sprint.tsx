@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect } from 'react';
 import {
     Button, InputLabel, MenuItem, Select, SelectChangeEvent,
 } from '@mui/material';
@@ -6,9 +6,11 @@ import Box from '@mui/material/Box';
 import FormControl from '@mui/material/FormControl';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
+import axios from 'axios';
 import { Card } from './Card';
 import { style } from './style';
 import './Sprint.css';
+import { baseUrl } from '../../core/api';
 
 interface wordItemMix {
     correct: boolean;
@@ -44,10 +46,14 @@ export const Sprint: React.FC = () => {
     const [open, setOpen] = React.useState(false);
     const handleClose = () => {
         setOpen(false);
+        setStartGame(false);
         setCards([]);
-    };
-    const falseAnswer = () => {
-        setAnwersFalse(cards.filter((item) => answers.some((i) => item.correct !== i.correct)));
+        setCurrentWord('');
+        settranslateWord('');
+        setindexWord(0);
+        setPageWord(0);
+        setAnwers([]);
+        setAnwersFalse([]);
     };
 
     const handleChange = (event: SelectChangeEvent) => {
@@ -55,28 +61,29 @@ export const Sprint: React.FC = () => {
         setPageWord(Math.floor(Math.random() * (max - min)) + min);
     };
 
+    const getWords = async () => {
+        const response = await axios.get(`${baseUrl}/words?page=${pageWord}&group=${level}`);
+        return response.data;
+    };
+
     useEffect(() => {
         if (startGame) {
-            console.log(level, pageWord, '>>start');
-            fetch(`${process.env.REACT_APP_BASE_URL}words?page=${pageWord}&group=${level}`)
-                .then((response) => response.json())
-                .then((data) => {
-                    const firstWordTranslate = data[0].wordTranslate;
-                    setCurrentWord(data[0].word);
-                    settranslateWord(data[0].wordTranslate);
-                    setCards(
-                        data.map((item: wordItemMix, index: number) => {
-                            const wordTranslate = index % 2 === 0
-                                ? data[index + 2]?.wordTranslate || firstWordTranslate
-                                : item.wordTranslate;
-                            return {
-                                ...item,
-                                wordTranslate,
-                                correct: index % 2 !== 0,
-                            };
-                        }),
-                    );
-                });
+            const response = getWords();
+            response.then((data) => {
+                const firstWordTranslate = data[0].wordTranslate;
+                setCurrentWord(data[0].word);
+                settranslateWord(data[0].wordTranslate);
+                setCards(
+                    data.map((item: wordItemMix, index: number) => {
+                        const wordTranslate = index % 2 === 0 ? data[index + 2]?.wordTranslate || firstWordTranslate : item.wordTranslate;
+                        return {
+                            ...item,
+                            wordTranslate,
+                            correct: index % 2 !== 0,
+                        };
+                    }),
+                );
+            });
         }
     }, [startGame]);
 
@@ -84,7 +91,7 @@ export const Sprint: React.FC = () => {
         setStartGame(true);
     };
 
-    const changeCardTrue = useCallback(() => {
+    const changeCardTrue = () => {
         setindexWord(indexWord + 1);
         if (cards.length === 0 && cards[0].correct === true) {
             answers.push(cards[0]);
@@ -99,12 +106,11 @@ export const Sprint: React.FC = () => {
             }
             if (indexWord === cards.length - 1) {
                 setOpen(true);
-                console.log(answers, answersFalse, '<<answer');
             }
         }
-    }, [indexWord]);
+    };
 
-    const changeCardFalse = useCallback(() => {
+    const changeCardFalse = () => {
         setindexWord(indexWord + 1);
         if (cards.length === 0 && cards[0].correct === false) {
             answers.push(cards[0]);
@@ -119,10 +125,9 @@ export const Sprint: React.FC = () => {
             }
             if (indexWord === cards.length - 1) {
                 setOpen(true);
-                console.log(answers, answersFalse, '<<answer');
             }
         }
-    }, [indexWord]);
+    };
 
     return cards.length === 0 ? (
         <div className="sprint">
@@ -163,6 +168,7 @@ export const Sprint: React.FC = () => {
                 translateWord={translateWord}
                 changeCardTrue={changeCardTrue}
                 changeCardFalse={changeCardFalse}
+                handleClose={handleClose}
             />
             <div>
                 <Modal
