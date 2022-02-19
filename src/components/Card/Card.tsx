@@ -62,7 +62,7 @@ export const CardItem: React.FC<ICardProps> = ({
                             {word.textExampleTranslate}
                         </Typography>
                     </CardContent>
-                    {value ? (
+                    {value.currentUser ? (
                         isDifficult ? (
                             location.pathname === '/manual' ? (
                                 <IconButton aria-label="remove from favorites">

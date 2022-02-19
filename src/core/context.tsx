@@ -1,4 +1,4 @@
 import React from 'react';
-import { IGetCurrentUser } from '../utils/alias';
+import { IContextValue } from '../utils/alias';
 
-export const MyContext = React.createContext<IGetCurrentUser | null>(null);
+export const MyContext = React.createContext<IContextValue>({ currentUser: null });

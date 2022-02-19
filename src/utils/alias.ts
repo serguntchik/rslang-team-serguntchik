@@ -65,3 +65,7 @@ export interface PaginationRoundedProps {
 export interface GroupsProps {
     setGroup(group: number): void;
 }
+export interface IContextValue {
+    currentUser: IGetCurrentUser | null;
+    setCurrentUser?: (currentUser: IGetCurrentUser | null) => void;
+}

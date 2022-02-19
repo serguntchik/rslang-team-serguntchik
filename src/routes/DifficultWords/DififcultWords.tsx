@@ -9,11 +9,11 @@ export const DifficultWords: React.FC = () => {
     const [cards, setCards] = useState<ICardData[]>([]);
     const [group, setGroup] = useState(0);
     const [page, setPage] = useState(0);
-    const value = useContext(MyContext);
+    const { currentUser } = useContext(MyContext);
 
     useEffect(() => {
         const getCardData = async () => {
-            const words: ICardData[] = await getAllUserAggregatedWords({ userId: value?.id, group, page });
+            const words: ICardData[] = await getAllUserAggregatedWords({ userId: currentUser?.id, group, page });
             const newWords = words.map((word) => {
                 const newWord = word;
                 newWord.isDifficult = true;

@@ -11,7 +11,7 @@ export const Manual: React.FC = () => {
     const [cards, setCards] = useState<ICardData[]>([]);
     const [group, setGroup] = useState(0);
     const [page, setPage] = useState(0);
-    const value = useContext(MyContext);
+    const { currentUser } = useContext(MyContext);
 
     const sortedWords = (words: ICardData[], arr2: ICardData[]) => {
         const newWords = words.map((item) => {
@@ -29,12 +29,13 @@ export const Manual: React.FC = () => {
 
     useEffect(() => {
         const getCardData = async () => {
+            let difficultWords: ICardData[] = [];
             const words: ICardData[] = await getWords({ group, page });
-            const difficultWords: ICardData[] = await getAllUserAggregatedWords({ userId: value?.id, group, page });
+            if (currentUser) difficultWords = await getAllUserAggregatedWords({ userId: currentUser?.id, group, page });
             sortedWords(words, difficultWords);
         };
         getCardData();
-    }, [value, page, group]);
+    }, [currentUser, page, group]);
 
     return (
         <div className="manual">

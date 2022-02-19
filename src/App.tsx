@@ -1,34 +1,34 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+/* eslint-disable */
 
 import { getCurrentUser } from './core/api';
 import { MyContext } from './core/context';
-import { LogIn, Footer, ResponsiveAppBar } from './components';
-import {
-    DifficultWords, Games, MainPage, Manual, Statistic, Team,
-} from './routes';
+import { Authentication, LogIn, Footer, ResponsiveAppBar } from './components';
+import { DifficultWords, Games, MainPage, Manual, Statistic, Team } from './routes';
 import { IGetCurrentUser } from './utils/alias';
 
 export const App = () => {
     const [currentUser, setCurrentUser] = useState<IGetCurrentUser | null>(null);
 
+    const getUser = async () => {
+        const user: IGetCurrentUser = await getCurrentUser();
+        setCurrentUser(user);
+    };
+
     useEffect(() => {
-        const getUser = async () => {
-            const user = await getCurrentUser();
-            setCurrentUser(user);
-        };
         localStorage.getItem('token') && getUser();
     }, []);
 
     return (
-        <MyContext.Provider value={currentUser}>
+        <MyContext.Provider value={{ currentUser, setCurrentUser }}>
             <BrowserRouter>
                 <div className="App">
                     <ResponsiveAppBar />
                     <Routes>
                         <Route path="/" element={<MainPage />} />
-                        <Route path="auth" element={<LogIn />} />
-                        <Route path="games" element={<Games />} />
+                        <Route path="auth" element={<Authentication />} />
+                        <Route path="login" element={<LogIn />} />
                         <Route path="manual" element={<Manual />} />
                         {currentUser ? (
                             <Route path="difficult" element={<DifficultWords />} />
