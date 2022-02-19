@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Button } from '@mui/material';
 import Stack from '@mui/material/Stack';
 import './Sprint.css';
@@ -8,16 +8,31 @@ export interface SprintCard {
     translateWord: string;
     changeCardTrue: () => void;
     changeCardFalse: () => void;
+    handleClose: () => void;
 }
 
 export const Card = (props: SprintCard) => {
     const {
-        word, translateWord, changeCardTrue, changeCardFalse,
+        word, translateWord, changeCardTrue, changeCardFalse, handleClose,
     } = props;
 
     return (
         <div className="container_sprint_card">
+            <div className="wrapper__close_btn">
+                <Button onClick={handleClose}>Закрыть</Button>
+            </div>
             <div className="sprint sprint_card">
+                <div className="container_check">
+                    <svg width="20" height="20">
+                        <circle cx="10" cy="10" r="5" fill="white" />
+                    </svg>
+                    <svg width="20" height="20">
+                        <circle cx="10" cy="10" r="5" fill="white" />
+                    </svg>
+                    <svg width="20" height="20">
+                        <circle cx="10" cy="10" r="5" fill="white" />
+                    </svg>
+                </div>
                 <div className="sprint_words">
                     <div className="sprint_word">{word}</div>
                     <div className="sprint_translate">{translateWord}</div>
