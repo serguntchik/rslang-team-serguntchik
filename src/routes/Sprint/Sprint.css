@@ -16,8 +16,9 @@
 
 .container_sprint_card {
   display: flex;
+  flex-direction: column;
   height: 85vh;
-  width: auto;
+  width: 85vw;
 }
 
 .sprint_card{
@@ -43,4 +44,9 @@
 .wrapper__close_btn {
   display: flex;
   justify-content: flex-end;
+}
+
+.circle {
+  border-radius: 50%;
+  color: antiquewhite;
 }
