@@ -6,6 +6,7 @@ import './Sprint.css';
 export interface SprintCard {
     word: string;
     translateWord: string;
+    colorCircle: string;
     changeCardTrue: () => void;
     changeCardFalse: () => void;
     handleClose: () => void;
@@ -13,7 +14,7 @@ export interface SprintCard {
 
 export const Card = (props: SprintCard) => {
     const {
-        word, translateWord, changeCardTrue, changeCardFalse, handleClose,
+        word, translateWord, colorCircle, changeCardTrue, changeCardFalse, handleClose,
     } = props;
 
     return (
@@ -24,13 +25,13 @@ export const Card = (props: SprintCard) => {
             <div className="sprint sprint_card">
                 <div className="container_check">
                     <svg width="20" height="20">
-                        <circle cx="10" cy="10" r="5" fill="white" />
+                        <circle cx="10" cy="10" r="5" fill={colorCircle} />
                     </svg>
                     <svg width="20" height="20">
-                        <circle cx="10" cy="10" r="5" fill="white" />
+                        <circle cx="10" cy="10" r="5" fill={colorCircle} />
                     </svg>
                     <svg width="20" height="20">
-                        <circle cx="10" cy="10" r="5" fill="white" />
+                        <circle cx="10" cy="10" r="5" fill={colorCircle} />
                     </svg>
                 </div>
                 <div className="sprint_words">

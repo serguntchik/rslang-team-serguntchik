@@ -42,6 +42,7 @@ export const Sprint: React.FC = () => {
     const [max] = React.useState(29);
     const [answers, setAnwers] = React.useState<wordItemMix[]>([]);
     const [answersFalse, setAnwersFalse] = React.useState<wordItemMix[]>([]);
+    const [colorCircle, setcolorCircle] = React.useState('white');
 
     const [open, setOpen] = React.useState(false);
     const handleClose = () => {
@@ -166,6 +167,7 @@ export const Sprint: React.FC = () => {
             <Card
                 word={currentWord}
                 translateWord={translateWord}
+                colorCircle={colorCircle}
                 changeCardTrue={changeCardTrue}
                 changeCardFalse={changeCardFalse}
                 handleClose={handleClose}
