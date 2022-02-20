@@ -13,13 +13,13 @@ const infoTeam = [
     {
         id: '2',
         image: '/viktor.jpg',
-        about: 'Настроил аутентификацию, разработал игру "Аудиовызов".',
+        about: 'Настроил аутентификацию, разработал игру "Аудиовызов", ',
         name: ' Виктор ',
         git: 'https://github.com/BlackHatMan',
     },
     {
         id: '3',
-        image: '/avapanda.png',
+        image: '/lubomir.jpg',
         about: 'Разработал страницы словаря и учебника.',
         name: ' Любомир ',
         git: 'https://github.com/Liubomyr86',
