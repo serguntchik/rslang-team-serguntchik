@@ -1,4 +1,5 @@
 import * as React from 'react';
+import LogoutIcon from '@mui/icons-material/Logout';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
@@ -9,15 +10,22 @@ import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import { AppBar } from '@mui/material';
 import MenuIcon from '@material-ui/icons/Menu';
-import { Outlet, Link } from 'react-router-dom';
+import {
+    Outlet,
+    Link,
+    useNavigate,
+    useLocation,
+} from 'react-router-dom';
 import { MyContext } from '../../core/context';
 
-const pages = ['Игры', 'Учебник', 'Словарь', 'Статистика'];
-const linkRoute = ['games', 'manual', 'difficult', 'statistic'];
+const pages = ['Игры', 'Учебник', 'Словарь'];
+const linkRoute = ['games', 'manual', 'difficult'];
 
 export const ResponsiveAppBar = () => {
     const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
     const { currentUser, setCurrentUser } = React.useContext(MyContext);
+    const navigation = useNavigate();
+    const location = useLocation();
 
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElNav(event.currentTarget);
@@ -28,8 +36,12 @@ export const ResponsiveAppBar = () => {
     };
 
     const logout = () => {
-        localStorage.clear();
+        localStorage.removeItem('token');
+        localStorage.removeItem('refreshToken');
+        localStorage.removeItem('id');
+
         setCurrentUser!(null);
+        location.pathname === '/difficult' && navigation('/');
     };
 
     return (
@@ -91,18 +103,42 @@ export const ResponsiveAppBar = () => {
                         </Link>
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                        {pages.map((page, index) => (
-                            <Button key={page} onClick={handleCloseNavMenu} sx={{ my: 2 }}>
-                                <Link to={`/${linkRoute[index]}`}>{page}</Link>
-                            </Button>
-                        ))}
+                        {pages.map((page, index) => {
+                            let item = null;
+
+                            if (!currentUser && page !== 'Словарь') {
+                                item = (
+                                    <Button
+                                        key={page}
+                                        onClick={handleCloseNavMenu}
+                                        sx={{ my: 2 }}
+                                    >
+                                        <Link to={`/${linkRoute[index]}`}>{page}</Link>
+                                    </Button>
+                                );
+                            } else if (currentUser) {
+                                item = (
+                                    <Button
+                                        key={page}
+                                        onClick={handleCloseNavMenu}
+                                        sx={{ my: 2 }}
+                                    >
+                                        <Link to={`/${linkRoute[index]}`}>{page}</Link>
+                                    </Button>
+                                );
+                            }
+
+                            return item;
+                        })}
                     </Box>
 
                     <Box sx={{ flexGrow: 0 }}>
                         {currentUser ? (
-                            <Button color="inherit" onClick={logout}>
-                                {currentUser.name}
-                            </Button>
+                            <div style={{ display: 'flex', alignItems: 'center', columnGap: '10px' }}>
+                                <p>{currentUser.name}</p>
+
+                                <LogoutIcon style={{ cursor: 'pointer' }} onClick={logout} />
+                            </div>
                         ) : (
                             <Button color="inherit">
                                 <Link to="/login">Войти</Link>
