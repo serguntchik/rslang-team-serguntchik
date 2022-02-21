@@ -175,4 +175,8 @@
   .wrapper__slader_container {
     padding: calc(15% - 60px);
   }
+
+  .carousel .control-dots {
+    margin: 0;
+  }
 }
