@@ -51,25 +51,27 @@ export const deletUserWord = async (word: ICardData) => {
 };
 
 // Users
-export const getNewToken = async () => {
-    const refreshToken = localStorage.getItem('refreshToken');
-    const id = localStorage.getItem('id');
-    const response = await axios.get(`${BASE_URL}users/${id}/tokens`, {
-        headers: {
-            Authorization: `Bearer ${refreshToken}`,
-        },
-    });
-    localStorage.setItem('refreshToken', response.data.refreshToken);
-    localStorage.setItem('token', response.data.token);
-};
+/* export const getNewToken = async () => {
+    if (localStorage.getItem('refreshToken')) {
+        const refreshToken = localStorage.getItem('refreshToken');
+        const id = localStorage.getItem('id');
+        const response = await axios.get(`${BASE_URL}/users/${id}/tokens`, {
+            headers: {
+                Authorization: `Bearer ${refreshToken}`,
+            },
+        });
+        localStorage.setItem('refreshToken', response.data.refreshToken);
+        localStorage.setItem('token', response.data.token);
+    }
+}; */
 
 export const createUser = async (data: IFormInput) => {
-    const response = await axios.post(`${BASE_URL}users`, data);
+    const response = await axios.post(`${BASE_URL}/users`, data);
     return response.data;
 };
 
 export const getCurrentUser = async () => {
-    const response = await axios.get(`${baseUrl}/users`, {
+    const response = await axios.get(`${baseUrl}/users/`, {
         headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
@@ -80,24 +82,38 @@ export const getCurrentUser = async () => {
 
 // Sign In
 export const signIn = async (user: IFormInput) => {
-    const response = await axios.post(`${BASE_URL}signin`, user);
+    const response = await axios.post(`${BASE_URL}/signin`, user);
     return response.data;
 };
 
 axios.interceptors.response.use(
-    (response) => response,
-    (rej) => {
-        if (rej.response.status === 401) {
-            getNewToken();
+    (config) => config,
+    (err) => {
+        if (err.response.status === 401) {
+            axios
+                .get(`${BASE_URL}/users/${localStorage.getItem('id')}/tokens`, {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem('refreshToken')}`,
+                    },
+                })
+                .then((res) => {
+                    localStorage.setItem('refreshToken', res.data.refreshToken);
+                    localStorage.setItem('token', res.data.token);
+                    // eslint-disable-next-line no-param-reassign
+                    err.config.headers = {
+                        Authorization: `Bearer ${res.data.refreshToken}`,
+                    };
+                    return axios.request(err.config);
+                });
         }
-        return Promise.reject(rej);
     },
 );
 
 // User/AggregatedWords
 
 export const getAllUserAggregatedWords = async (data: IGetWords) => {
-    const filter = `{"$and":[{"userWord.difficulty":"hard", "group":${data.group}, "page":${data.page}}]}`;
+    const filter = `;
+        }{"$and":[{"userWord.difficulty":"hard", "group":${data.group}, "page":${data.page}}]}`;
     const response = await axios.get(
         `${baseUrl}/users/${data.userId}/aggregatedWords/${generateQueryString([
             { key: 'wordsPerPage', value: 20 },
