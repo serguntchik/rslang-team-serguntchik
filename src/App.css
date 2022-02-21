@@ -152,19 +152,21 @@
   }
 }
 
-@media screen and (max-width: 812px) and (min-width: 420px){
+@media screen and (max-width: 812px) and (min-width: 320px){
   .wrapper__mane_page{
-    grid-row-gap: 15em;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-row-gap: 21em;
   }
 
   .App-logo_static {
     position: absolute;
-    top:25px;
+    top: 60px;
     right: calc(10% - 100px);
   }
   
   .App-logo {
-    top:calc(25% - 35px);
+    top: 35px;
     right: calc(10% - 95px);
     position: absolute;
     pointer-events: none;
@@ -173,28 +175,4 @@
   .wrapper__slader_container {
     padding: calc(15% - 60px);
   }
-}
-
-.btns{
-  font-size: 1.6rem;
-  letter-spacing: 0.1rem;
-  font-weight: 600;
-  padding: 10px 40px;
-  margin-top: 5px;
-  border:  1px;
-  border-radius: 20px;
-  color: white;
-  cursor: pointer;
-}
-
-.btn_color1{
-  background-color: rgb(210, 165, 195);
-}
-
-.btn_color2{
-  background-color: rgb(210, 165, 195);
-}
-
-.btn_color3{
-  background-color: rgb(210, 165, 195);
 }

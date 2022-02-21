@@ -28,7 +28,7 @@ export const ResponsiveAppBar = () => {
     };
 
     return (
-        <AppBar position="static" color="transparent">
+        <AppBar position="fixed" color="transparent">
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
                     <Typography variant="h6" noWrap component="div" sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}>
