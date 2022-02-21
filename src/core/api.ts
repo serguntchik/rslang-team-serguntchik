@@ -21,8 +21,7 @@ export const getWords = async (data: IGetWords) => {
     return response.data;
 };
 
-export const createUserWord = async (word: ICardData) => {
-    const userId = localStorage.getItem('id');
+export const createUserWord = async (word: ICardData, userId: string | undefined) => {
     await axios.post(
         `${baseUrl}/users/${userId}/words/${word.id}`,
         { difficulty: 'hard' },
@@ -34,8 +33,7 @@ export const createUserWord = async (word: ICardData) => {
     );
 };
 
-export const deleteUserWord = async (word: ICardData) => {
-    const userId = localStorage.getItem('id');
+export const deleteUserWord = async (word: ICardData, userId: string | undefined) => {
     await axios.delete(
         /* eslint no-underscore-dangle: [1, { "allow": ["__place"] }] */
         `${baseUrl}/users/${userId}/words/${word._id}`,

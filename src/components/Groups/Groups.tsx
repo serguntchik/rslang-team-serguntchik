@@ -15,6 +15,8 @@ export const Groups: React.FC<GroupsProps> = (props) => {
     };
     const { setGroup } = props;
 
+    const groups = ['Раздел 1', 'Раздел 2', 'Раздел 3', 'Раздел 4', 'Раздел 5', 'Раздел 6'];
+
     return (
         <div>
             <Button
@@ -24,7 +26,7 @@ export const Groups: React.FC<GroupsProps> = (props) => {
                 aria-expanded={open ? 'true' : undefined}
                 onClick={handleClick}
             >
-                Groups
+                Разделы
             </Button>
 
             <Menu
@@ -36,54 +38,17 @@ export const Groups: React.FC<GroupsProps> = (props) => {
                     'aria-labelledby': 'basic-button',
                 }}
             >
-                <MenuItem
-                    onClick={() => {
-                        setGroup(0);
-                        handleClose();
-                    }}
-                >
-                    Group 1
-                </MenuItem>
-                <MenuItem
-                    onClick={() => {
-                        setGroup(1);
-                        handleClose();
-                    }}
-                >
-                    Group 2
-                </MenuItem>
-                <MenuItem
-                    onClick={() => {
-                        setGroup(2);
-                        handleClose();
-                    }}
-                >
-                    Group 3
-                </MenuItem>
-                <MenuItem
-                    onClick={() => {
-                        setGroup(3);
-                        handleClose();
-                    }}
-                >
-                    Group 4
-                </MenuItem>
-                <MenuItem
-                    onClick={() => {
-                        setGroup(4);
-                        handleClose();
-                    }}
-                >
-                    Group 5
-                </MenuItem>
-                <MenuItem
-                    onClick={() => {
-                        setGroup(5);
-                        handleClose();
-                    }}
-                >
-                    Group 6
-                </MenuItem>
+                {groups.map((item, index) => (
+                    <MenuItem
+                        key={item}
+                        onClick={() => {
+                            setGroup(index);
+                            handleClose();
+                        }}
+                    >
+                        {item}
+                    </MenuItem>
+                ))}
             </Menu>
         </div>
     );

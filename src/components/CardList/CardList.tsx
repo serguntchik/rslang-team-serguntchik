@@ -1,15 +1,22 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, {
+    useContext,
+    useEffect,
+    useRef,
+    useState,
+} from 'react';
 
 import Grid from '@mui/material/Grid';
 
 import { baseUrl, createUserWord, deleteUserWord } from '../../core/api';
 import { ICardData, ICardPropsData } from '../../utils/alias';
 import { CardItem } from '../Card/Card';
+import { MyContext } from '../../core/context';
 
 export const CardList: React.FC<ICardPropsData> = ({ words, remove }) => {
     const [difficultWord, setDifficultWord] = useState<ICardData | null>(null);
     const [currentPlayingWord, setCurrentPlayingWord] = useState<ICardData | null>(null);
     const audioElement = useRef(new Audio());
+    const { currentUser } = useContext(MyContext);
 
     const onPlayClicked = (word: ICardData) => {
         if (currentPlayingWord) {
@@ -57,12 +64,12 @@ export const CardList: React.FC<ICardPropsData> = ({ words, remove }) => {
 
     const addToDifficult = (word: ICardData) => {
         const diffWord = word;
-        createUserWord(diffWord);
+        createUserWord(diffWord, currentUser?.id);
         diffWord.isDifficult = true;
         setDifficultWord(diffWord);
     };
     const removeFromDifficult = (word: ICardData) => {
-        deleteUserWord(word);
+        deleteUserWord(word, currentUser?.id);
         remove!(word);
     };
 
@@ -71,7 +78,7 @@ export const CardList: React.FC<ICardPropsData> = ({ words, remove }) => {
     useEffect(() => audioElement.current.pause(), [words]);
 
     return (
-        <Grid container spacing={2}>
+        <Grid container spacing={2} style={{ marginBottom: '50px' }}>
             {words.map((card) => (
                 /* eslint no-underscore-dangle: [1, { "allow": ["__place"] }] */
                 <Grid key={card.id || card._id} item lg={3} md={4} sm={6} xs={12}>

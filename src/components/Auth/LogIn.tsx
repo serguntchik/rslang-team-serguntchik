@@ -50,10 +50,12 @@ export const LogIn: React.FC = () => {
                 localStorage.setItem('token', loginResponse.token);
                 localStorage.setItem('refreshToken', loginResponse.refreshToken);
                 localStorage.setItem('id', loginResponse.userId);
-                localStorage.setItem('name', loginResponse.name);
                 setWait(false);
-                getUser();
-                navigation('/');
+                getUser()
+                    .then(() => {
+                        navigation('/');
+                    })
+                    .catch(() => console.log('User not found!'));
             })
             .catch(() => {
                 setWait(false);
