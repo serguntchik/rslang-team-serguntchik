@@ -7,7 +7,7 @@ import {
     AudioContainer, Authentication, LogIn, Footer, ResponsiveAppBar,
 } from './components';
 import {
-    DifficultWords, Games, MainPage, Manual, Statistic, Team,
+    DifficultWords, Games, MainPage, Manual, Sprint, Statistic, Team,
 } from './routes';
 import { IGetCurrentUser } from './utils/alias';
 
@@ -33,6 +33,7 @@ export const App = () => {
                         <Route path="auth" element={<Authentication />} />
                         <Route path="games" element={<Games />} />
                         <Route path="games/audio" element={<AudioContainer />} />
+                        <Route path="games/sprint" element={<Sprint />} />
                         <Route path="login" element={<LogIn />} />
                         <Route path="manual" element={<Manual />} />
                         {currentUser ? (
