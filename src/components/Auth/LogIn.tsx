@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { TextField, Button, Snackbar } from '@material-ui/core';
-import {
-    Alert, Container, IconButton, InputAdornment,
-} from '@mui/material';
+/* eslint-disable */
+import { Alert, Container, IconButton, InputAdornment } from '@mui/material';
 import { Visibility, VisibilityOff } from '@material-ui/icons';
-import { signIn, IFormInput } from '../../core/api';
+import { signIn, IFormInput, getCurrentUser } from '../../core/api';
 import './auth.css';
+import { MyContext } from '../../core/context';
+import { IGetCurrentUser } from '../../utils/alias';
 
 interface ILoginResponse {
     message: string;
@@ -21,6 +22,12 @@ export const LogIn: React.FC = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [isWait, setWait] = useState(false);
     const navigation = useNavigate();
+    const { setCurrentUser } = useContext(MyContext);
+
+    const getUser = async () => {
+        const user: IGetCurrentUser = await getCurrentUser();
+        setCurrentUser!(user);
+    };
 
     const handleClickShowPassword = () => {
         setShowPassword((prevState) => !prevState);
@@ -45,6 +52,7 @@ export const LogIn: React.FC = () => {
                 localStorage.setItem('id', loginResponse.userId);
                 localStorage.setItem('name', loginResponse.name);
                 setWait(false);
+                getUser();
                 navigation('/');
             })
             .catch(() => {
@@ -119,7 +127,6 @@ export const LogIn: React.FC = () => {
             </form>
             <h3 style={{ textAlign: 'center' }}>
                 Нет аккаунта?
-                {' '}
                 <Link to="/auth">Создать</Link>
             </h3>
         </Container>

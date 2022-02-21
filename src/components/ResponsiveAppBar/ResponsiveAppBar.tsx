@@ -12,12 +12,14 @@ import MenuItem from '@mui/material/MenuItem';
 import { AppBar } from '@mui/material';
 import MenuIcon from '@material-ui/icons/Menu';
 import { Outlet, Link } from 'react-router-dom';
+import { MyContext } from '../../core/context';
 
-const pages = ['Игры', 'Учебник', 'Статистика'];
-const linkRoute = ['games', 'manual', 'statistic'];
+const pages = ['Игры', 'Учебник', 'Словарь', 'Статистика'];
+const linkRoute = ['games', 'manual', 'difficult', 'statistic'];
 
 export const ResponsiveAppBar = () => {
     const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
+    const { currentUser, setCurrentUser } = React.useContext(MyContext);
 
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElNav(event.currentTarget);
@@ -25,6 +27,11 @@ export const ResponsiveAppBar = () => {
 
     const handleCloseNavMenu = () => {
         setAnchorElNav(null);
+    };
+
+    const logout = () => {
+        localStorage.clear();
+        setCurrentUser!(null);
     };
 
     return (
@@ -98,9 +105,15 @@ export const ResponsiveAppBar = () => {
                     </Box>
 
                     <Box sx={{ flexGrow: 0 }}>
-                        <Button color="inherit">
-                            <Link to="/login">Войти</Link>
-                        </Button>
+                        {currentUser ? (
+                            <Button color="inherit" onClick={logout}>
+                                {currentUser.name}
+                            </Button>
+                        ) : (
+                            <Button color="inherit">
+                                <Link to="/login">Войти</Link>
+                            </Button>
+                        )}
                     </Box>
                 </Toolbar>
             </Container>
