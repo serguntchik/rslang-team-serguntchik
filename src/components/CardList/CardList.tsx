@@ -73,7 +73,8 @@ export const CardList: React.FC<ICardPropsData> = ({ words, remove }) => {
     return (
         <Grid container spacing={2}>
             {words.map((card) => (
-                <Grid key={card.id} item lg={3} md={4} sm={6} xs={12}>
+                /* eslint no-underscore-dangle: [1, { "allow": ["__place"] }] */
+                <Grid key={card.id || card._id} item lg={3} md={4} sm={6} xs={12}>
                     <CardItem
                         word={card}
                         play={onPlayClicked}
