@@ -9,6 +9,14 @@
   color:aliceblue
 }
 
+.footer_link {
+  color: aliceblue;
+}
+
+.footer_link:hover {
+  font-weight: 800;
+}
+
 .wrapper__footer {
   display: flex;
   align-items: center;
