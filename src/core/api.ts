@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { ICardData, IGetWords } from '../utils/alias';
 
+export const BASE_URL = process.env.REACT_APP_BASE_URL;
 export interface IFormInput {
     email: string;
     password: string;
@@ -14,10 +15,8 @@ export interface IQueryParams {
 
 export const baseUrl = process.env.REACT_APP_BASE_URL;
 
-const generateQueryString = (queryParams: IQueryParams[] = []) => {
-    const querry = queryParams.length ? `?${queryParams.map((item) => `${item.key}=${item.value}`).join('&')}` : '';
-    return querry;
-};
+// eslint-disable-next-line max-len
+const generateQueryString = (queryParams: IQueryParams[] = []) => (queryParams.length ? `?${queryParams.map((item) => `${item.key}=${item.value}`).join('&')}` : '');
 
 // Words
 export const getWords = async (data: IGetWords) => {
@@ -55,7 +54,7 @@ export const deletUserWord = async (word: ICardData) => {
 export const getNewToken = async () => {
     const refreshToken = localStorage.getItem('refreshToken');
     const id = localStorage.getItem('id');
-    const response = await axios.get(`${baseUrl}/users/${id}/tokens`, {
+    const response = await axios.get(`${BASE_URL}users/${id}/tokens`, {
         headers: {
             Authorization: `Bearer ${refreshToken}`,
         },
@@ -65,7 +64,7 @@ export const getNewToken = async () => {
 };
 
 export const createUser = async (data: IFormInput) => {
-    const response = await axios.post(`${baseUrl}/users`, data);
+    const response = await axios.post(`${BASE_URL}users`, data);
     return response.data;
 };
 
@@ -81,7 +80,7 @@ export const getCurrentUser = async () => {
 
 // Sign In
 export const signIn = async (user: IFormInput) => {
-    const response = await axios.post(`${baseUrl}/signin`, user);
+    const response = await axios.post(`${BASE_URL}signin`, user);
     return response.data;
 };
 
