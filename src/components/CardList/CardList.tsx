@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 
 import Grid from '@mui/material/Grid';
 
-import { baseUrl, createUserWord, deletUserWord } from '../../core/api';
+import { baseUrl, createUserWord, deleteUserWord } from '../../core/api';
 import { ICardData, ICardPropsData } from '../../utils/alias';
 import { CardItem } from '../Card/Card';
 
@@ -62,7 +62,7 @@ export const CardList: React.FC<ICardPropsData> = ({ words, remove }) => {
         setDifficultWord(diffWord);
     };
     const removeFromDifficult = (word: ICardData) => {
-        deletUserWord(word);
+        deleteUserWord(word);
         remove!(word);
     };
 

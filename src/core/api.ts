@@ -37,7 +37,7 @@ export const createUserWord = async (word: ICardData) => {
     );
 };
 
-export const deletUserWord = async (word: ICardData) => {
+export const deleteUserWord = async (word: ICardData) => {
     const userId = localStorage.getItem('id');
     await axios.delete(
         /* eslint no-underscore-dangle: [1, { "allow": ["__place"] }] */
@@ -80,7 +80,7 @@ export const getCurrentUser = async () => {
 
 // Sign In
 export const signIn = async (user: IFormInput) => {
-    const response = await axios.post(`${BASE_URL}signin`, user);
+    const response = await axios.post(`${BASE_URL}/signin`, user);
     return response.data;
 };
 
