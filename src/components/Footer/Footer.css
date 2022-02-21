@@ -5,7 +5,16 @@
 
 .git_link {
   display: flex;
+  align-items: center;
   color:aliceblue
+}
+
+.footer_link {
+  color: aliceblue;
+}
+
+.footer_link:hover {
+  font-weight: 800;
 }
 
 .wrapper__footer {
