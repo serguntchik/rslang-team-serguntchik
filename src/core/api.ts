@@ -51,19 +51,18 @@ export const deletUserWord = async (word: ICardData) => {
 };
 
 // Users
-/* export const getNewToken = async () => {
-    if (localStorage.getItem('refreshToken')) {
-        const refreshToken = localStorage.getItem('refreshToken');
-        const id = localStorage.getItem('id');
-        const response = await axios.get(`${BASE_URL}/users/${id}/tokens`, {
-            headers: {
-                Authorization: `Bearer ${refreshToken}`,
-            },
-        });
-        localStorage.setItem('refreshToken', response.data.refreshToken);
-        localStorage.setItem('token', response.data.token);
-    }
-}; */
+export const getNewToken = async () => {
+    const refreshToken = localStorage.getItem('refreshToken');
+    const id = localStorage.getItem('id');
+    const response = await axios.get(`${BASE_URL}/users/${id}/tokens`, {
+        headers: {
+            Authorization: `Bearer ${refreshToken}`,
+        },
+    });
+    localStorage.setItem('refreshToken', response.data.refreshToken);
+    localStorage.setItem('token', response.data.token);
+    return response;
+};
 
 export const createUser = async (data: IFormInput) => {
     const response = await axios.post(`${BASE_URL}/users`, data);
@@ -90,21 +89,13 @@ axios.interceptors.response.use(
     (config) => config,
     (err) => {
         if (err.response.status === 401) {
-            axios
-                .get(`${BASE_URL}/users/${localStorage.getItem('id')}/tokens`, {
-                    headers: {
-                        Authorization: `Bearer ${localStorage.getItem('refreshToken')}`,
-                    },
-                })
-                .then((res) => {
-                    localStorage.setItem('refreshToken', res.data.refreshToken);
-                    localStorage.setItem('token', res.data.token);
-                    // eslint-disable-next-line no-param-reassign
-                    err.config.headers = {
-                        Authorization: `Bearer ${res.data.refreshToken}`,
-                    };
-                    return axios.request(err.config);
-                });
+            getNewToken().then((res) => {
+                // eslint-disable-next-line no-param-reassign
+                err.config.headers = {
+                    Authorization: `Bearer ${res.data.refreshToken}`,
+                };
+                return axios.request(err.config);
+            });
         }
     },
 );
