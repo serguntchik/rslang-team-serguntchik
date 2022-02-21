@@ -15,9 +15,6 @@ export interface IQueryParams {
 
 export const baseUrl = process.env.REACT_APP_BASE_URL;
 
-// eslint-disable-next-line max-len
-const generateQueryString = (queryParams: IQueryParams[] = []) => (queryParams.length ? `?${queryParams.map((item) => `${item.key}=${item.value}`).join('&')}` : '');
-
 // Words
 export const getWords = async (data: IGetWords) => {
     const response = await axios.get(`${baseUrl}/words?group=${data.group}&page=${data.page}`);
@@ -89,32 +86,32 @@ axios.interceptors.response.use(
     (config) => config,
     (err) => {
         if (err.response.status === 401) {
-            getNewToken().then((res) => {
-                // eslint-disable-next-line no-param-reassign
-                err.config.headers = {
-                    Authorization: `Bearer ${res.data.refreshToken}`,
+            return getNewToken().then((res) => {
+                const originalRequest = {
+                    ...err.config,
+                    headers: {
+                        ...err.config.headers,
+                        Authorization: `Bearer ${res.data.token}`,
+                    },
                 };
-                return axios.request(err.config);
+                return axios(originalRequest);
             });
         }
+        return Promise.reject(err);
     },
 );
 
 // User/AggregatedWords
-
 export const getAllUserAggregatedWords = async (data: IGetWords) => {
-    const filter = `;
-        }{"$and":[{"userWord.difficulty":"hard", "group":${data.group}, "page":${data.page}}]}`;
-    const response = await axios.get(
-        `${baseUrl}/users/${data.userId}/aggregatedWords/${generateQueryString([
-            { key: 'wordsPerPage', value: 20 },
-            { key: 'filter', value: filter },
-        ])}`,
-        {
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem('token')}`,
-            },
+    const filter = `{"$and":[{"userWord.difficulty":"hard", "group":${data.group}, "page":${data.page}}]}`;
+    const response = await axios.get(`${baseUrl}/users/${data.userId}/aggregatedWords`, {
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
-    );
+        params: {
+            wordsPerPage: 20,
+            filter,
+        },
+    });
     return response.data[0].paginatedResults;
 };

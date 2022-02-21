@@ -28,7 +28,7 @@ export const DifficultWords: React.FC = () => {
         /* eslint no-underscore-dangle: [1, { "allow": ["__place"] }] */
         setCards(cards.filter((card) => card._id !== word._id));
     };
-    console.log(cards);
+
     return (
         <div className="manual">
             <div className="controls">
