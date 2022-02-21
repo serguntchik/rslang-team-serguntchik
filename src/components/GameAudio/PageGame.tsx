@@ -19,9 +19,9 @@ export interface IPage {
     wordTranslate: string;
 }
 const PageGame: React.FC<{ page: IPage }> = ({ page }) => {
-    const pathImg = `${BASE_URL}${page.image}`;
-    const pathAudio = `${BASE_URL}${page.audio}`;
-    const audioExample = `${BASE_URL}${page.audioExample}`;
+    const pathImg = `${BASE_URL}/${page.image}`;
+    const pathAudio = `${BASE_URL}/${page.audio}`;
+    const audioExample = `${BASE_URL}/${page.audioExample}`;
 
     return (
         <div className="page--audiogame">

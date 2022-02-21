@@ -15,10 +15,8 @@ export interface IQueryParams {
 
 export const baseUrl = process.env.REACT_APP_BASE_URL;
 
-const generateQueryString = (queryParams: IQueryParams[] = []) => {
-    const querry = queryParams.length ? `?${queryParams.map((item) => `${item.key}=${item.value}`).join('&')}` : '';
-    return querry;
-};
+// eslint-disable-next-line max-len
+const generateQueryString = (queryParams: IQueryParams[] = []) => (queryParams.length ? `?${queryParams.map((item) => `${item.key}=${item.value}`).join('&')}` : '');
 
 // Words
 export const getWords = async (data: IGetWords) => {
@@ -84,10 +82,6 @@ export const getCurrentUser = async () => {
 export const signIn = async (user: IFormInput) => {
     const response = await axios.post(`${BASE_URL}signin`, user);
     return response.data;
-};
-export const getPage = async (level: number) => {
-    const rndPage = Math.floor(Math.random() * 30);
-    return axios.get(`${BASE_URL}words?group=${level}&page=${rndPage}`);
 };
 
 axios.interceptors.response.use(

@@ -6,7 +6,7 @@ import AudioLevel from './AudioLevel';
 import AudioResults from './AudioResults';
 import './audioGame.css';
 import { IPage } from './PageGame';
-import { getPage } from '../../core/api';
+import { getWords } from '../../core/api';
 
 export const AudioContainer = () => {
     const [data, setData] = useState<IPage[]>([]);
@@ -17,12 +17,13 @@ export const AudioContainer = () => {
     const [showGame, setShowGame] = useState<boolean>(false);
 
     const levelHandler = (level: number) => {
-        setChoice(false);
+        const page = Math.floor(Math.random() * 30);
 
-        getPage(level).then((resp) => {
-            const words: string[] = resp.data.map((el: { wordTranslate: string }) => el.wordTranslate);
+        setChoice(false);
+        getWords({ group: level, page }).then((resp) => {
+            const words: string[] = resp.map((el: { wordTranslate: string }) => el.wordTranslate);
             setWordsRu(words);
-            setData(resp.data);
+            setData(resp);
             setShowGame(true);
         });
     };

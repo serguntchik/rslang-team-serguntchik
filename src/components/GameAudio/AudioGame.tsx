@@ -35,14 +35,14 @@ const AudioGame: React.FC<{
     useEffect(() => {
         const rnd = rand(position, wordsRu);
         setRndAnswer(rnd);
-        const audio = new Audio(`${BASE_URL}${currentPage.audio}`);
+        const audio = new Audio(`${BASE_URL}/${currentPage.audio}`);
         audio.play();
     }, [position]);
 
     const res = {
         word: currentPage.word,
         answer: false,
-        audio: `${BASE_URL}${currentPage.audio}`,
+        audio: `${BASE_URL}/${currentPage.audio}`,
     };
 
     const handlerAnswer = (el = '') => {
@@ -124,7 +124,7 @@ const AudioGame: React.FC<{
                 {choiceWord !== '' ? (
                     <PageGame page={currentPage} />
                 ) : (
-                    <VolumeUpIcon path={`${BASE_URL}${currentPage.audio}`} width="150px" />
+                    <VolumeUpIcon path={`${BASE_URL}/${currentPage.audio}`} width="150px" />
                 )}
             </Container>
             <Stack direction="row" spacing={2} alignItems="center" justifyContent="center">
