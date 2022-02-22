@@ -1,20 +1,9 @@
 import React from 'react';
-import LinearProgress from '@mui/material/LinearProgress';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
 
-const LinearProgressWithLabel = ({ value, progress }: { value: number; progress: number }) => (
-    <Box sx={{ display: 'flex', alignItems: 'center', flexDirection: 'row-reverse' }}>
-        <Box sx={{ width: '100%', mr: 1 }}>
-            <LinearProgress variant="determinate" value={value} />
-        </Box>
-        <Box sx={{ minWidth: 35 }}>
-            <Typography variant="body2" color="text.secondary">
-                {progress}
-            </Typography>
-        </Box>
-    </Box>
-);
+import CircularProgress from '@mui/material/CircularProgress';
+import Typography from '@mui/material/Typography';
+
+import './CountDown.css';
 
 export const CountDown = ({
     countdownTime,
@@ -42,8 +31,11 @@ export const CountDown = ({
     }, []);
 
     return (
-        <Box sx={{ width: '100%' }}>
-            <LinearProgressWithLabel value={normalise(progress)} progress={progress} />
-        </Box>
+        <div className="countdown-wrapper">
+            <CircularProgress variant="determinate" value={normalise(progress)} />
+            <Typography className="countdown-wrapper__value" variant="body2" color="text.secondary">
+                {progress}
+            </Typography>
+        </div>
     );
 };
