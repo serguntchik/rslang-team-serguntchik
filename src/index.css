@@ -5,7 +5,10 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: aliceblue;
+  background-image: url('/public/rs_lang_background_2.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
 }
 
 code {
@@ -15,14 +18,6 @@ code {
 
 a:link {
   text-decoration: none;
-  color: white;
-  font-weight: 600;
-}
-
-a:hover {
-  text-decoration: none;
-  color: #07699e;
-  font-weight: 600;
 }
 
 .games{
@@ -33,16 +28,6 @@ a:hover {
   display: flex;
   justify-content: center;
   background-color: #8fdd9c;
-}
-
-.footer{
-  margin-top: 1rem;
-  padding: 1rem;
-  background-color: #1976d2;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
 }
 
 .wrapper__footer{

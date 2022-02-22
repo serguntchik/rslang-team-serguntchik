@@ -1,5 +1,28 @@
 import React from 'react';
+
+import Button from '@mui/material/Button';
+import GitHubIcon from '@mui/icons-material/GitHub';
+
 import './Footer.css';
+
+const team = [
+    {
+        name: 'Sergey',
+        github: 'https://github.com/serguntchik',
+    },
+    {
+        name: 'Виктор',
+        github: 'https://github.com/BlackHatMan',
+    },
+    {
+        name: 'Любомир',
+        github: 'https://github.com/Liubomyr86',
+    },
+    {
+        name: 'Ольга',
+        github: 'https://github.com/Olga-plus',
+    },
+];
 
 export const Footer = () => (
     <div className="footer">
@@ -25,31 +48,18 @@ export const Footer = () => (
                     RS School
                 </a>
             </div>
-            <div className="git_link">
-                <a className="footer_link" href="https://github.com/serguntchik" target="_blank" rel="noreferrer">
-                    <div className="block_link">
-                        <img src="/logo_git.svg" alt="git-logo" className="git_logo" />
-                        Sergey
-                    </div>
-                </a>
-                <a className="footer_link" href="https://github.com/BlackHatMan" target="_blank" rel="noreferrer">
-                    <div className="block_link">
-                        <img src="/logo_git.svg" alt="git-logo" className="git_logo" />
-                        Viktor
-                    </div>
-                </a>
-                <a className="footer_link" href="https://github.com/Liubomyr86" target="_blank" rel="noreferrer">
-                    <div className="block_link">
-                        <img src="/logo_git.svg" alt="git-logo" className="git_logo" />
-                        Lubomir
-                    </div>
-                </a>
-                <a className="footer_link" href="https://github.com/Olga-plus" target="_blank" rel="noreferrer">
-                    <div className="block_link">
-                        <img src="/logo_git.svg" alt="git-logo" className="git_logo" />
-                        Olga
-                    </div>
-                </a>
+            <div className="git-link">
+                {team.map((member) => (
+                    <Button
+                        key={member.name}
+                        href={member.github}
+                        target="_blank"
+                        sx={{ my: 2, color: 'white' }}
+                        startIcon={<GitHubIcon />}
+                    >
+                        {member.name}
+                    </Button>
+                ))}
             </div>
         </div>
     </div>

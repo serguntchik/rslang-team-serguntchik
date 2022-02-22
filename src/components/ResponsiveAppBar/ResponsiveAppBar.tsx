@@ -11,19 +11,21 @@ import MenuItem from '@mui/material/MenuItem';
 import { AppBar } from '@mui/material';
 import MenuIcon from '@material-ui/icons/Menu';
 import {
-    Outlet,
-    Link,
-    useNavigate,
-    useLocation,
+    Outlet, Link, useNavigate, useLocation,
 } from 'react-router-dom';
 import { MyContext } from '../../core/context';
 
-const pages = ['Игры', 'Учебник', 'Словарь'];
-const linkRoute = ['games', 'manual', 'difficult'];
+const gamesRoute = { title: 'Игры', link: '/games' };
+const wordsRoute = { title: 'Учебник', link: '/manual' };
+const difficultWordsRoute = { title: 'Словарь', link: '/difficult' };
+const teamRoute = { title: 'Команда', link: '/team' };
 
 export const ResponsiveAppBar = () => {
     const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
     const { currentUser, setCurrentUser } = React.useContext(MyContext);
+    const pages = currentUser
+        ? [gamesRoute, wordsRoute, difficultWordsRoute, teamRoute]
+        : [gamesRoute, wordsRoute, teamRoute];
     const navigation = useNavigate();
     const location = useLocation();
 
@@ -84,9 +86,9 @@ export const ResponsiveAppBar = () => {
                             }}
                         >
                             {pages.map((page, index) => (
-                                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                                <MenuItem key={page.title} onClick={handleCloseNavMenu}>
                                     <Typography textAlign="center">
-                                        <Link to={`/${linkRoute[index]}`}>{page}</Link>
+                                        <Link to={page.link}>{page.title}</Link>
                                     </Typography>
                                 </MenuItem>
                             ))}
@@ -103,33 +105,18 @@ export const ResponsiveAppBar = () => {
                         </Link>
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                        {pages.map((page, index) => {
-                            let item = null;
-
-                            if (!currentUser && page !== 'Словарь') {
-                                item = (
-                                    <Button
-                                        key={page}
-                                        onClick={handleCloseNavMenu}
-                                        sx={{ my: 2 }}
-                                    >
-                                        <Link to={`/${linkRoute[index]}`}>{page}</Link>
-                                    </Button>
-                                );
-                            } else if (currentUser) {
-                                item = (
-                                    <Button
-                                        key={page}
-                                        onClick={handleCloseNavMenu}
-                                        sx={{ my: 2 }}
-                                    >
-                                        <Link to={`/${linkRoute[index]}`}>{page}</Link>
-                                    </Button>
-                                );
-                            }
-
-                            return item;
-                        })}
+                        {pages.map((page, index) => (
+                            <Button
+                                key={page.title}
+                                variant="text"
+                                onClick={handleCloseNavMenu}
+                                sx={{ my: 2 }}
+                                component={Link}
+                                to={page.link}
+                            >
+                                {page.title}
+                            </Button>
+                        ))}
                     </Box>
 
                     <Box sx={{ flexGrow: 0 }}>
@@ -140,8 +127,8 @@ export const ResponsiveAppBar = () => {
                                 <LogoutIcon style={{ cursor: 'pointer' }} onClick={logout} />
                             </div>
                         ) : (
-                            <Button color="inherit">
-                                <Link to="/login">Войти</Link>
+                            <Button variant="text" sx={{ my: 2 }} component={Link} to="/login">
+                                Войти
                             </Button>
                         )}
                     </Box>

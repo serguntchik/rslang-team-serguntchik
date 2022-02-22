@@ -1,10 +1,11 @@
 import React from 'react';
+
+import GitHubIcon from '@mui/icons-material/GitHub';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { CardActionArea } from '@mui/material';
-import { StringDecoder } from 'string_decoder';
+import Button from '@mui/material/Button';
 
 export interface TeamCard {
     image: string;
@@ -18,21 +19,18 @@ export const ActionAreaCard: React.FC<TeamCard> = (props: TeamCard) => {
         image, about, name, git,
     } = props;
     return (
-        <Card sx={{ maxWidth: 150 }}>
-            <CardActionArea>
-                <CardMedia component="img" height="140" image={image} alt="photo" />
-                <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
-                        <a href={git} target="_blank" rel="noreferrer">
-                            <img src="/logo_git_violet.svg" alt="git-logo" className="git_logo_teams" />
-                            {name}
-                        </a>
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                        {about}
-                    </Typography>
-                </CardContent>
-            </CardActionArea>
+        <Card sx={{ maxWidth: 250 }}>
+            <CardMedia component="img" height="250" image={image} alt="photo" />
+            <CardContent>
+                <Typography variant="h5" component="div" sx={{ display: 'flex', justifyContent: 'center' }}>
+                    <Button variant="text" href={git} target="_blank" sx={{ my: 2 }} startIcon={<GitHubIcon />}>
+                        {name}
+                    </Button>
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                    {about}
+                </Typography>
+            </CardContent>
         </Card>
     );
 };
