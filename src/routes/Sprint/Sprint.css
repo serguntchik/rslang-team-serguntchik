@@ -6,7 +6,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-size: 1.6rem;
+  font-size: 1rem;
 }
 
 .btn-start{
@@ -17,8 +17,6 @@
 .container_sprint_card {
   display: flex;
   flex-direction: column;
-  height: 85vh;
-  width: 85vw;
 }
 
 .sprint_card{
@@ -49,4 +47,8 @@
 .circle {
   border-radius: 50%;
   color: antiquewhite;
+}
+
+.sprint_btn-container {
+  margin-top: 10px;
 }

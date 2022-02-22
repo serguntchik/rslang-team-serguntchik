@@ -10,7 +10,10 @@ import axios from 'axios';
 import { Card } from './Card';
 import { style } from './style';
 import './Sprint.css';
-import { baseUrl } from '../../core/api';
+// import { baseUrl } from '../../core/api';
+import { CountDown } from '../../components';
+
+const baseUrl = 'https://rs-lang-olivka.herokuapp.com';
 
 interface wordItemMix {
     correct: boolean;
@@ -43,8 +46,9 @@ export const Sprint: React.FC = () => {
     const [answers, setAnwers] = React.useState<wordItemMix[]>([]);
     const [answersFalse, setAnwersFalse] = React.useState<wordItemMix[]>([]);
     const [colorCircle, setcolorCircle] = React.useState('white');
-
+    const [timer, setTimer] = React.useState(60);
     const [open, setOpen] = React.useState(false);
+
     const handleClose = () => {
         setOpen(false);
         setStartGame(false);
@@ -55,6 +59,10 @@ export const Sprint: React.FC = () => {
         setPageWord(0);
         setAnwers([]);
         setAnwersFalse([]);
+    };
+
+    const finishTime = () => {
+        setOpen(true);
     };
 
     const handleChange = (event: SelectChangeEvent) => {
@@ -157,14 +165,17 @@ export const Sprint: React.FC = () => {
                             <MenuItem value={6}>6</MenuItem>
                         </Select>
                     </FormControl>
-                    <button className="btns btn-start" type="button" onClick={startChangeLevel}>
-                        НАЧАТЬ
-                    </button>
+                    <div className="sprint_btn-container">
+                        <Button variant="contained" color="primary" onClick={startChangeLevel}>
+                            НАЧАТЬ
+                        </Button>
+                    </div>
                 </div>
             </div>
         </div>
     ) : (
         <div className="sprint">
+            <CountDown countdownTime={60} countdownFinished={finishTime} />
             <Card
                 word={currentWord}
                 translateWord={translateWord}

@@ -19,9 +19,6 @@ export const Card = (props: SprintCard) => {
 
     return (
         <div className="container_sprint_card">
-            <div className="wrapper__close_btn">
-                <Button onClick={handleClose}>Закрыть</Button>
-            </div>
             <div className="sprint sprint_card">
                 <div className="container_check">
                     <svg width="20" height="20">
