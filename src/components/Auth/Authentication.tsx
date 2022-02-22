@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
-import { TextField, Button } from '@material-ui/core';
-import { Container, IconButton, InputAdornment } from '@mui/material';
+
+import {
+    Button, Container, IconButton, InputAdornment, TextField,
+} from '@mui/material';
 import { Visibility, VisibilityOff } from '@material-ui/icons';
+
 import { createUser, IFormInput } from '../../core/api';
 import './auth.css';
 

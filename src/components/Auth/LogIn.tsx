@@ -1,10 +1,12 @@
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
-import { TextField, Button, Snackbar } from '@material-ui/core';
-/* eslint-disable */
-import { Alert, Container, IconButton, InputAdornment } from '@mui/material';
+
+import {
+    Alert, Button, Container, IconButton, InputAdornment, Snackbar, TextField,
+} from '@mui/material';
 import { Visibility, VisibilityOff } from '@material-ui/icons';
+
 import { signIn, IFormInput, getCurrentUser } from '../../core/api';
 import './auth.css';
 import { MyContext } from '../../core/context';
