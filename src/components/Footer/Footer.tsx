@@ -22,7 +22,7 @@ export const Footer = () => (
                     rel="noreferrer"
                     style={{ padding: '5px' }}
                 >
-                    RS Shcool
+                    RS School
                 </a>
             </div>
             <div className="git_link">
