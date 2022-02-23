@@ -1,0 +1,10 @@
+.countdown-wrapper {
+    position: relative;
+    margin-top: 80px;
+}
+
+.countdown-wrapper__value {
+    position: absolute;
+    top: 25%;
+    left: 30%;
+}

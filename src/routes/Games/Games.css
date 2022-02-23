@@ -1,0 +1,38 @@
+.games{
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(141, 198, 255, 0.2);
+}
+.conteiner_card {
+  display:flex;
+}
+
+.cover {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  width: 400px;
+  font-size: 4rem;
+  border-radius: 20px;
+  margin: 15px;
+}
+
+.card_color1{
+  background-color: rgb(174, 74, 132, 0.5);
+}
+
+.card_color2{
+  background-color: rgb(87, 176, 57, 0.3);
+}
+
+.card_color3{
+  background-color: rgb(255, 237, 0, 0.25);
+}
+
+.card_color4{
+  background-color: rgb(0, 160, 227, 0.8);
+}

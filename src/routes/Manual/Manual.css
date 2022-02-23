@@ -1,0 +1,9 @@
+.manual {
+    padding: 20px;
+    margin-top: 80px;
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+}

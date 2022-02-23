@@ -1,0 +1,40 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-image: url('/public/rs_lang_background_2.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+a:link {
+  text-decoration: none;
+}
+
+.games{
+  background-color: #8dc6ff;
+}
+
+.statistic {
+  display: flex;
+  justify-content: center;
+  background-color: #8fdd9c;
+}
+
+.wrapper__footer{
+  display: flex;
+  justify-content: space-around;
+  padding: 0 10px 0 10px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  color: white;
+}

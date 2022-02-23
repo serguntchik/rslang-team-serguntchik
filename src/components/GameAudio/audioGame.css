@@ -1,0 +1,44 @@
+.wrapper_audio {
+  padding: 10% 0px;
+  margin: 0 auto;
+}
+.page--audiogame {
+  display: flex;
+  justify-content: center;
+  padding: 50px 0px;
+}
+.game-tittle {
+  font-size: 3rem;
+  font-weight: normal;
+  text-align: center;
+}
+.game-subtitle {
+  font-size: 2rem;
+  font-weight: normal;
+  padding: 0 10px;
+}
+.volume-up-icon {
+  cursor: pointer;
+}
+.result--page {
+  display: flex;
+  justify-content: space-around;
+  padding: 20px ;
+}
+.page--audiogame-image {
+  border: 2px gray solid;
+  border-radius: 10px;
+}
+.page--audiogame-text {
+  max-width: 300px;
+  margin: 0 5px;
+}
+.page--audiogame-transcription {
+  margin-left: 5px;
+  color: burlywood;
+}
+.game--answer-btn {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}

@@ -1,0 +1,33 @@
+.authForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: solid 1px rgb(138, 127, 127);
+  border-radius: 20px;
+  padding: 10px;
+  max-width: 500px;
+  margin: 150px auto 0;
+  font-size: 18px;
+}
+.auth-error {
+  color: #bf1650;
+  font-size: 15px;
+}
+
+.auth-error::before {
+  display: inline;
+  content: "⚠ ";
+}
+.auth--registration{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  font-size: 15px;
+  margin: 5px;
+}
+.registration-toggle{
+  cursor: pointer;
+}
+.registration-toggle:hover {
+  color: #bf1650;
+}
